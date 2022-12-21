@@ -74,12 +74,19 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
       <ScrollableContainer>
         {mode === SettingsMode.GLOBAL && (
           <>
-            <Flex pb="24px" flexDirection="column">
-              <Text bold textTransform="uppercase" fontSize="18px" color="secondary" mb="24px">
+            <Flex pb="24px" flexDirection="column" style={{ fontSize: '14px' }}>
+              <Text
+                bold
+                textTransform="uppercase"
+                fontSize="18px"
+                color="secondary"
+                mb="24px"
+                style={{ fontSize: '14px' }}
+              >
                 {t('Global')}
               </Text>
               <Flex justifyContent="space-between" mb="24px">
-                <Text>{t('Dark mode')}</Text>
+                <Text style={{ fontSize: '14px' }}>{t('Dark mode')}</Text>
                 <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? 'light' : 'dark')} />
               </Flex>
               <Flex justifyContent="space-between" alignItems="center" mb="24px">
@@ -109,7 +116,14 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
         {mode === SettingsMode.SWAP_LIQUIDITY && (
           <>
             <Flex pt="3px" flexDirection="column">
-              <Text bold textTransform="uppercase" fontSize="18px" color="secondary" mb="24px">
+              <Text
+                bold
+                textTransform="uppercase"
+                fontSize="14px"
+                color="secondary"
+                mb="24px"
+                style={{ fontSize: '14px' }}
+              >
                 {t('Swaps & Liquidity')}
               </Text>
               <Flex justifyContent="space-between" alignItems="center" mb="24px">
@@ -119,16 +133,16 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
             </Flex>
             <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
-                <Text>{t('Zap (Beta)')}</Text>
+                <Text style={{ fontSize: '14px' }}>{t('Zap (Beta)')}</Text>
                 <QuestionHelper
                   text={
                     <Box>
-                      <Text>
+                      <Text style={{ fontSize: '14px' }}>
                         {t(
                           'Zap enables simple liquidity provision. Add liquidity with one token and one click, without manual swapping or token balancing.',
                         )}
                       </Text>
-                      <Text>
+                      <Text style={{ fontSize: '14px' }}>
                         {t(
                           'If you experience any issue when adding or removing liquidity, please disable Zap and retry.',
                         )}
@@ -149,7 +163,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
             </Flex>
             <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
-                <Text>{t('Expert Mode')}</Text>
+                <Text style={{ fontSize: '14px' }}>{t('Expert Mode')}</Text>
                 <QuestionHelper
                   text={t('Bypasses confirmation modals and allows high slippage trades. Use at your own risk.')}
                   placement="top-start"
@@ -165,7 +179,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
             </Flex>
             <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
-                <Text>{t('Disable Multihops')}</Text>
+                <Text style={{ fontSize: '14px' }}>{t('Disable Multihops')}</Text>
                 <QuestionHelper text={t('Restricts swaps to direct pairs only.')} placement="top-start" ml="4px" />
               </Flex>
               <Toggle
@@ -179,14 +193,20 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
             </Flex>
             <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
-                <Text>{t('Flippy sounds')}</Text>
+                <Text style={{ fontSize: '14px' }}>{t('Flippy sounds')}</Text>
                 <QuestionHelper
                   text={t('Fun sounds to make a truly immersive pancake-flipping trading experience')}
                   placement="top-start"
                   ml="4px"
                 />
               </Flex>
-              <PancakeToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" />
+              {/* <PancakeToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" /> */}
+              <Toggle
+                id="toggle-disable-multihop-button"
+                checked={audioPlay}
+                scale="md"
+                onChange={toggleSetAudioMode}
+              />
             </Flex>
           </>
         )}

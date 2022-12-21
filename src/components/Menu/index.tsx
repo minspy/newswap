@@ -47,10 +47,19 @@ const Menu = (props) => {
           <GlobalSettings mode={SettingsMode.GLOBAL} />
           <NetworkSwitcher />
           <div>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-              <div style={{background: '#F4F8FB', marginRight: '10px', paddingRight: '10px', display: 'flex', alignItems: 'center', borderRadius: '0 15px 15px 0'}}>
-                <img src='images/img/icon-1.jpg' style={{width: '30px', height: '30px', marginRight: '5px'}} alt=""/>
-                <img src='images/img/bottom-icon.png' style={{width: '15px', height: '15px'}} alt=""/>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div
+                style={{
+                  background: '#F4F8FB',
+                  marginRight: '10px',
+                  paddingRight: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  borderRadius: '0 15px 15px 0',
+                }}
+              >
+                <img src="images/img/icon-1.jpg" style={{ width: '30px', height: '30px', marginRight: '5px' }} alt="" />
+                <img src="images/img/bottom-icon.png" style={{ width: '15px', height: '15px' }} alt="" />
               </div>
               {/* <div style={{background: '#F4F8FB', marginRight: '5px', paddingRight: '10px', display: 'flex', alignItems: 'center',borderRadius: '0 15px 15px 0'}}>
                 <img src='images/img/qianbao.jpg' style={{width: '30px', height: '30px', marginRight: '5px'}} alt=""/>

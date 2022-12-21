@@ -21,6 +21,7 @@ const InputRow = styled.div<{ selected: boolean }>`
   align-items: center;
   justify-content: flex-end;
   padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
+  padding-top: 8px;
 `
 const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })<{ zapStyle?: ZapStyle }>`
   padding: 0 0.5rem;
@@ -43,6 +44,7 @@ const LabelRow = styled.div`
   font-size: 0.75rem;
   line-height: 1rem;
   padding: 0.75rem 1rem 0 1rem;
+  padding-top: 8px;
 `
 const InputPanel = styled.div`
   display: flex;
@@ -61,7 +63,7 @@ const Container = styled.div<{ zapStyle?: ZapStyle; error?: boolean }>`
       border-radius: 0px 16px 16px 16px;
     `};
   border: 1px solid #000000;
-  border-radius: 12px
+  border-radius: 12px;
 `
 
 const Overlay = styled.div`
@@ -117,7 +119,7 @@ export default function CurrencyInputPanel({
   disabled,
   error,
   showBUSD,
-  labelType
+  labelType,
 }: CurrencyInputPanelProps) {
   const { account } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
@@ -146,7 +148,10 @@ export default function CurrencyInputPanel({
 
   return (
     <Box position="relative" id={id}>
-      <Flex alignItems="center" justifyContent="space-between" style={{display: 'none'}}>
+      <Text style={{ fontSize: '12px', marginBottom: '2px' }}>
+        {label === 'X' ? 'X（发行的代币）' : label === 'Y' ? 'Y（募集的代币）' : ''}
+      </Text>
+      <Flex alignItems="center" justifyContent="space-between" style={{ display: 'none' }}>
         {account && (
           <Text
             onClick={!disabled && onMax}
@@ -163,10 +168,9 @@ export default function CurrencyInputPanel({
       </Flex>
       <InputPanel>
         <Container as="label" zapStyle={zapStyle} error={error}>
-          {
-            labelType === 'swap' ? 
-            <Flex alignItems="center" justifyContent="space-between" style={{padding: '0 12px', paddingTop: '10px'}}>
-              <Text style={{fontSize: '14px'}}>{label}</Text>
+          {labelType === 'swap' ? (
+            <Flex alignItems="center" justifyContent="space-between" style={{ padding: '0 12px', paddingTop: '10px' }}>
+              <Text style={{ fontSize: '14px' }}>{label}</Text>
               {account && (
                 <Text
                   onClick={!disabled && onMax}
@@ -181,9 +185,9 @@ export default function CurrencyInputPanel({
                 </Text>
               )}
             </Flex>
-            : labelType === 'swap-balance' ? 
-            <Flex alignItems="center" justifyContent="space-between" style={{padding: '0 12px', paddingTop: '10px'}}>
-              <Text style={{fontSize: '14px'}}>{label}</Text>
+          ) : labelType === 'swap-balance' ? (
+            <Flex alignItems="center" justifyContent="space-between" style={{ padding: '0 12px', paddingTop: '10px' }}>
+              <Text style={{ fontSize: '14px' }}>{label}</Text>
               {/* <Text>balance</Text> */}
               {account && (
                 <Text
@@ -198,9 +202,10 @@ export default function CurrencyInputPanel({
                     : ' -'}
                 </Text>
               )}
-            </Flex> :
-            <Flex alignItems="center" justifyContent="space-between" style={{padding: '0 15px', paddingTop: '20px'}}>
-              <Text style={{ fontSize: '12px'}}>INPUT</Text>
+            </Flex>
+          ) : (
+            <Flex alignItems="center" justifyContent="space-between" style={{ padding: '0 15px', paddingTop: '10px' }}>
+              <Text style={{ fontSize: '12px' }}>INPUT</Text>
               {/* <Text>balance: </Text> */}
               {account && (
                 <Text
@@ -216,7 +221,7 @@ export default function CurrencyInputPanel({
                 </Text>
               )}
             </Flex>
-          }
+          )}
           <LabelRow>
             {/* <Text>{label === 'X' ? 'X（发行的代币）' : label === 'Y' ? 'Y（募集的代币）' : ''}</Text> */}
             <NumericalInput
@@ -225,19 +230,23 @@ export default function CurrencyInputPanel({
               className="token-amount-input"
               value={value}
               onBlur={onInputBlur}
-              style={{textAlign: 'left', fontSize: '20px', color: '#333333'}}
+              style={{ textAlign: 'left', fontSize: '20px', color: '#333333' }}
               onUserInput={(val) => {
                 onUserInput(val)
               }}
             />
             {/* <Text style={{border: '2px solid #4B5860', padding: '0 8px', borderRadius: '15px', fontSize: '12px'}}>MAX</Text> */}
             {account && currency && !disabled && showMaxButton && label !== 'To' && (
-              <Button onClick={onMax} scale="xs" variant="secondary" 
+              <Button
+                onClick={onMax}
+                scale="xs"
+                variant="secondary"
                 style={{
-                    fontSize: '10px', 
-                    border: '1px solid #000000',
-                    color: '#333333'
-                }}>
+                  fontSize: '10px',
+                  border: '1px solid #000000',
+                  color: '#333333',
+                }}
+              >
                 {t('Max').toLocaleUpperCase(locale)}
               </Button>
             )}
@@ -260,11 +269,11 @@ export default function CurrencyInputPanel({
                     <CurrencyLogo currency={currency} size="20px" style={{ marginRight: '8px' }} />
                   ) : null}
                   {pair ? (
-                    <Text id="pair" bold style={{fontSize: '12px'}}>
+                    <Text id="pair" bold style={{ fontSize: '12px' }}>
                       {pair?.token0.symbol}:{pair?.token1.symbol}
                     </Text>
                   ) : (
-                    <Text id="pair" bold style={{fontSize: '12px'}}>
+                    <Text id="pair" bold style={{ fontSize: '12px' }}>
                       {(currency && currency.symbol && currency.symbol.length > 20
                         ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
                             currency.symbol.length - 5,

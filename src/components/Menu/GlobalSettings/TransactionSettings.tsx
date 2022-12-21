@@ -82,7 +82,7 @@ const SlippageTabs = () => {
     <Flex flexDirection="column">
       <Flex flexDirection="column" mb="24px">
         <Flex mb="12px">
-          <Text>{t('Slippage Tolerance')}</Text>
+          <Text style={{ fontSize: '14px' }}>{t('Slippage Tolerance')}</Text>
           <QuestionHelper
             text={t(
               'Setting a high slippage tolerance can help transactions succeed, but you may not get such a good price. Use with caution.',
@@ -101,6 +101,7 @@ const SlippageTabs = () => {
               setUserSlippageTolerance(10)
             }}
             variant={userSlippageTolerance === 10 ? 'primary' : 'tertiary'}
+            style={{ fontSize: '14px' }}
           >
             0.1%
           </Button>
@@ -113,6 +114,7 @@ const SlippageTabs = () => {
               setUserSlippageTolerance(50)
             }}
             variant={userSlippageTolerance === 50 ? 'primary' : 'tertiary'}
+            style={{ fontSize: '14px' }}
           >
             0.5%
           </Button>
@@ -125,6 +127,7 @@ const SlippageTabs = () => {
               setUserSlippageTolerance(100)
             }}
             variant={userSlippageTolerance === 100 ? 'primary' : 'tertiary'}
+            style={{ fontSize: '14px' }}
           >
             1.0%
           </Button>
