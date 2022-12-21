@@ -111,6 +111,7 @@ const DisclaimerModal: React.FC<React.PropsWithChildren<RiskDisclaimerProps>> = 
           width="100%"
           onClick={handleConfirm}
           disabled={checkState.some((check) => !check.value)}
+          style={{background: '#111526', color: 'white'}}
         >
           {t('Continue')}
         </Button>

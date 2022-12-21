@@ -33,7 +33,7 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
           (typeof backTo === 'string' ? (
             <Link passHref href={backTo}>
               <IconButton as="a" scale="sm">
-                <ArrowBackIcon width="32px" />
+                {/* <ArrowBackIcon width="32px" /> */}
               </IconButton>
             </Link>
           ) : (
@@ -46,10 +46,10 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
             <Heading as="h2">{title}</Heading>
             {!noConfig && (
               <Flex alignItems="center">
-                <NotificationDot show={expertMode}>
+                {/* <NotificationDot show={expertMode}>
                   <GlobalSettings mode={SettingsMode.SWAP_LIQUIDITY} />
                 </NotificationDot>
-                <Transactions />
+                <Transactions /> */}
               </Flex>
             )}
           </Flex>

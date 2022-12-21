@@ -79,6 +79,7 @@ export default function AddLiquidity() {
   const ammType = useAmmType()
   const [zapMode] = useZapModeManager()
   const [temporarilyZapMode, setTemporarilyZapMode] = useState(true)
+  const [swapSelect, setSwapSelect] = useState(1)
   const [currencyIdA, currencyIdB] = router.query.currency || ['BNB', CAKE[chainId]?.address]
   const [steps, setSteps] = useState(Steps.Choose)
 
@@ -577,8 +578,23 @@ export default function AddLiquidity() {
       (pair && JSBI.lessThan(pair.reserve1.raw, MINIMUM_LIQUIDITY))
     )
 
+  const swapFormulaList = [
+    {
+      label: 'SWAP1',
+      value: 'P=Y/X'
+    },
+    {
+      label: 'SWAP2',
+      value: 'P=4Y/3X'
+    },
+    {
+      label: 'SWAP3',
+      value: 'P=2Y/X'
+    }
+  ]
+  
   return (
-    <Page>
+    <Page style={{background: '#91C5F5'}}>
       <AppBody>
         {!showAddLiquidity && (
           <ChoosePair
@@ -590,8 +606,8 @@ export default function AddLiquidity() {
         )}
         {showAddLiquidity && (
           <>
-            <AmmSwitch />
-            <AppHeader
+            <AmmSwitch swapSelect={swapSelect} setSwapSelect={setSwapSelect} backTo={canZap ? () => setSteps(Steps.Choose) : '/liquidity'}/>
+            {/* <AppHeader
               title={
                 currencies[Field.CURRENCY_A]?.symbol && currencies[Field.CURRENCY_B]?.symbol
                   ? `${getLPSymbol(currencies[Field.CURRENCY_A].symbol, currencies[Field.CURRENCY_B].symbol)}`
@@ -602,24 +618,57 @@ export default function AddLiquidity() {
                 'Liquidity providers earn a 0.17% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.',
               )}
               backTo={canZap ? () => setSteps(Steps.Choose) : '/liquidity'}
-            />
+            /> */}
             {/* exp diff */}
-            <Text textAlign="center">恒定乘积公式 XY^0.5=K</Text>
             <CardBody>
               <AutoColumn gap="20px">
                 {noLiquidity && (
-                  <ColumnCenter>
-                    <Message variant="warning">
-                      <div>
-                        <Text bold mb="8px">
+                  // <ColumnCenter>
+                  //   <Message variant="warning">
+                  //     <div style={{
+                  //         fontFamily: 'Inter',
+                  //         fontStyle: 'normal',
+                  //         fontWeight: 400,
+                  //         fontSize: '10px',
+                  //         lineHeight: '12px',
+                  //         color: '#4263EB'
+                  //       }}>
+                  //       <Text bold mb="8px">
+                  //         {t('You are the first liquidity provider.')}
+                  //       </Text>
+                  //       <Text mb="8px">{t('The ratio of tokens you add will set the price of this pool.')}</Text>
+                  //       <Text>{t('Once you are happy with the rate click supply to review.')}</Text>
+                  //     </div>
+                  //   </Message>
+                  // </ColumnCenter>
+                      <div style={{
+                          fontFamily: 'Inter',
+                          fontStyle: 'normal',
+                          fontWeight: 400,
+                          fontSize: '10px',
+                          lineHeight: '16px',
+                          color: '#4263EB'
+                        }}>
+                        <span>
                           {t('You are the first liquidity provider.')}
-                        </Text>
-                        <Text mb="8px">{t('The ratio of tokens you add will set the price of this pool.')}</Text>
-                        <Text>{t('Once you are happy with the rate click supply to review.')}</Text>
+                        </span>
+                        <span>{t('The ratio of tokens you add will set the price of this pool.')}</span>
+                        <span>{t('Once you are happy with the rate click supply to review.')}</span>
                       </div>
-                    </Message>
-                  </ColumnCenter>
                 )}
+                
+                <Text textAlign="center">
+                  <div style={{display: 'flex', justifyContent: 'center', marginTop: '0px'}}>
+                  <Text style={{marginRight: '20px'}}>
+                  {swapFormulaList[swapSelect - 1].label}
+                  </Text>
+                  <Text>
+                  {swapFormulaList[swapSelect - 1].value}
+                  </Text>
+                  </div>
+                {/* 恒定乘积公式 XY^0.5=K */}
+                </Text>
+                
                 {noLiquidity && (
                   <PriceInputPanel
                     showBUSD
@@ -641,8 +690,14 @@ export default function AddLiquidity() {
                     id="add-liquidity-price"
                     showCommonBases={false}
                     commonBasesType={CommonBasesType.LIQUIDITY}
+                    disableCurrencySelectbBottomToken={canZap}
+                    onCurrencySelectBottomToken={handleCurrencyBSelect}
+                    currencyBottomToken={currencies[Field.CURRENCY_A]}
+                    showCommonBasesBottomToken
+                    commonBasesTypeBottomToken={CommonBasesType.LIQUIDITY}
                   />
                 )}
+                    {/* otherCurrencyBottomToken={} */}
                 <CurrencyInputPanel
                   disableCurrencySelect={canZap}
                   showBUSD
@@ -795,7 +850,7 @@ export default function AddLiquidity() {
                   </RowFixed>
                 )}
 
-                {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+                {/* {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
                   <>
                     <LightCard padding="0px" borderRadius="20px">
                       <RowBetween padding="1rem">
@@ -811,16 +866,65 @@ export default function AddLiquidity() {
                       </LightCard>
                     </LightCard>
                   </>
-                )}
+                )} */}
 
-                <RowBetween>
-                  <Text bold fontSize="12px" color="secondary">
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
+                  <Text bold fontSize="12px" color="secondary" style={{color: '#333333', fontSize: '12px'}}>
                     {t('Slippage Tolerance')}
                   </Text>
-                  <Text bold color="primary">
+                  <Text bold color="primary" style={{marginLeft: '10px', color: '#333333', fontSize: '12px'}}>
                     {allowedSlippage / 100}%
                   </Text>
-                </RowBetween>
+                </div>
+
+                <div style={{
+                  background: '#EDF3F9', 
+                  padding: '14px 16px', 
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                  }}>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      fontWeight: '400'
+                    }}>
+                      <span style={{color: '#333333', fontSize: '14px'}}>-</span>
+                      <span  style={{color: '#111526', fontSize: '12px', marginTop: '8px'}}>USDT per BNB</span>
+                    </div>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      fontWeight: '400'
+                    }}>
+                      <span style={{color: '#333333', fontSize: '14px'}}>-</span>
+                      <span style={{color: '#111526', fontSize: '12px', marginTop: '8px'}}>BNB per USDT</span>
+                    </div>
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      fontWeight: '400'
+                    }}>
+                      <span style={{color: '#333333', fontSize: '14px'}}>-</span>
+                      <span style={{color: '#111526', fontSize: '12px', marginTop: '8px'}}>Share of Poll</span>
+                    </div>
+                </div> 
+
+                <Text textAlign="center">
+                  <div style={{display: 'flex', justifyContent: 'center', marginTop: '0px'}}>
+                  <Text style={{marginRight: '20px'}}>
+                  {swapFormulaList[swapSelect - 1].label}
+                  </Text>
+                  <Text>
+                  {swapFormulaList[swapSelect - 1].value}
+                  </Text>
+                  </div>
+                {/* 恒定乘积公式 XY^0.5=K */}
+                </Text>
 
                 {pair && poolData && (
                   <RowBetween>
@@ -875,6 +979,9 @@ export default function AddLiquidity() {
                     <Button
                       isLoading={preferZapInstead && zapInEstimating}
                       variant={!isValid || zapIn.priceSeverity > 2 ? 'danger' : 'primary'}
+                      style={{
+                        background: '#101528'
+                      }}
                       onClick={() => {
                         if (preferZapInstead) {
                           setLiquidityState({
@@ -898,6 +1005,7 @@ export default function AddLiquidity() {
                       }}
                       disabled={buttonDisabled}
                     >
+                      {/*  */}
                       {errorText || t('Supply')}
                     </Button>
                   </AutoColumn>

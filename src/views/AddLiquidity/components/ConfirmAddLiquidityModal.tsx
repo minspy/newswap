@@ -73,7 +73,7 @@ const ConfirmAddLiquidityModal: React.FC<
 
   const modalBottom = useCallback(() => {
     return (
-      <Button width="100%" onClick={onAdd} mt="20px">
+      <Button width="100%" onClick={onAdd} mt="20px" style={{background: '#111526'}}>
         {noLiquidity ? t('Create Pool & Supply') : t('Confirm Supply')}
       </Button>
     )

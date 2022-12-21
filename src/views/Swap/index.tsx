@@ -373,7 +373,7 @@ export default function Swap() {
   const isChartSupported = useMemo(() => CHART_SUPPORT_CHAIN_IDS.includes(chainId), [chainId])
 
   return (
-    <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
+    <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded} style={{background: '#9BC5F2', padding: '30px 0'}}>
       <Flex width="100%" justifyContent="center" position="relative">
         {!isMobile && isChartSupported && (
           <PriceChartContainer
@@ -424,6 +424,7 @@ export default function Swap() {
                       label={
                         independentField === Field.OUTPUT && !showWrap && trade ? t('From (estimated)') : t('From')
                       }
+                      labelType="swap"
                       value={formattedAmounts[Field.INPUT]}
                       showMaxButton={!atMaxAmountInput}
                       currency={currencies[Field.INPUT]}
@@ -466,6 +467,7 @@ export default function Swap() {
                       value={formattedAmounts[Field.OUTPUT]}
                       onUserInput={handleTypeOutput}
                       label={independentField === Field.INPUT && !showWrap && trade ? t('To (estimated)') : t('To')}
+                      labelType="swap-balance"
                       showMaxButton={false}
                       currency={currencies[Field.OUTPUT]}
                       onCurrencySelect={handleOutputSelect}
@@ -507,31 +509,33 @@ export default function Swap() {
                             </>
                           )}
                         </RowBetween>
-                        <RowBetween align="center">
-                          <Label>{t('Slippage Tolerance')}</Label>
-                          <Text bold color="primary">
-                            {allowedSlippage / 100}%
-                          </Text>
-                        </RowBetween>
+                        {/* <RowBetween align="center"> */}
+                          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
+                            <Label style={{color: '#333333'}}>{t('Slippage Tolerance')}</Label>
+                            <Text bold color="primary" style={{marginLeft: '10px', color: '#333333'}}>
+                              {allowedSlippage / 100}%
+                            </Text>
+                          </div>
+                        {/* </RowBetween> */}
                       </AutoColumn>
                     )}
                   </AutoColumn>
-                  <Box mt="0.25rem">
+                  <Box mt="0.25rem" >
                     {swapIsUnsupported ? (
-                      <Button width="100%" disabled>
+                      <Button width="100%" disabled >
                         {t('Unsupported Asset')}
                       </Button>
                     ) : !account ? (
-                      <ConnectWalletButton width="100%" />
+                      <ConnectWalletButton width="100%"/>
                     ) : showWrap ? (
                       <Button width="100%" disabled={Boolean(wrapInputError)} onClick={onWrap}>
                         {wrapInputError ??
                           (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
                       </Button>
                     ) : noRoute && userHasSpecifiedInputOutput ? (
-                      <GreyCard style={{ textAlign: 'center', padding: '0.75rem' }}>
-                        <Text color="textSubtle">{t('Insufficient liquidity for this trade.')}</Text>
-                        {singleHopOnly && <Text color="textSubtle">{t('Try enabling multi-hop trades.')}</Text>}
+                      <GreyCard style={{ textAlign: 'center', padding: '0.75rem',background: '#111526' }}>
+                        <Text color="textSubtle"  style={{color: 'white'}}>{t('Insufficient liquidity for this trade.')}</Text>
+                        {singleHopOnly && <Text color="textSubtle" style={{color: 'white'}}>{t('Try enabling multi-hop trades.')}</Text>}
                       </GreyCard>
                     ) : showApproveFlow ? (
                       <RowBetween>
@@ -584,6 +588,7 @@ export default function Swap() {
                     ) : (
                       <Button
                         variant={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'danger' : 'primary'}
+                        style={{background: '#111526'}}
                         onClick={() => {
                           if (isExpertMode) {
                             handleSwap()

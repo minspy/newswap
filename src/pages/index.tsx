@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+// import { useRouter } from 'next/router'
 import { FACTORY_ADDRESS } from '@pancakeswap/sdk'
 import { getUnixTime, sub } from 'date-fns'
 import { gql } from 'graphql-request'
@@ -10,7 +12,11 @@ import { getBlocksFromTimestamps } from 'utils/getBlocksFromTimestamps'
 import { formatEther } from '@ethersproject/units'
 import Home from '../views/Home'
 
-const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
+const IndexPage = ({ totalTx30Days, addressCount30Days, tvl, ...props }) => {
+//   const router = useRouter()
+//   useEffect(()=>{
+//     router.push('/swap')
+//   },[])
   return (
     <SWRConfig
       value={{

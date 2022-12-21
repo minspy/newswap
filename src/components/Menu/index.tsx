@@ -34,16 +34,30 @@ const Menu = (props) => {
   const getFooterLinks = useMemo(() => {
     return footerLinks(t)
   }, [t])
-
+  // console.log('activeMenuItem=======', activeMenuItem)
   return (
     <UikitMenu
       linkComponent={(linkProps) => {
+        // return <div><img src='images/img/logo.jpg' style={{width: '32px', height: '32px'}}/></div>
         return <NextLinkFromReactRouter to={linkProps.href} {...linkProps} prefetch={false} />
       }}
       rightSide={
         <>
+          {/* <div><img src='images/img/logo.jpg' style={{width: '32px', height: '32px'}} alt=""/></div> */}
           <GlobalSettings mode={SettingsMode.GLOBAL} />
           <NetworkSwitcher />
+          <div>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <div style={{background: '#F4F8FB', marginRight: '10px', paddingRight: '10px', display: 'flex', alignItems: 'center', borderRadius: '0 15px 15px 0'}}>
+                <img src='images/img/icon-1.jpg' style={{width: '30px', height: '30px', marginRight: '5px'}} alt=""/>
+                <img src='images/img/bottom-icon.png' style={{width: '15px', height: '15px'}} alt=""/>
+              </div>
+              {/* <div style={{background: '#F4F8FB', marginRight: '5px', paddingRight: '10px', display: 'flex', alignItems: 'center',borderRadius: '0 15px 15px 0'}}>
+                <img src='images/img/qianbao.jpg' style={{width: '30px', height: '30px', marginRight: '5px'}} alt=""/>
+                <img src='images/img/bottom-icon.png' style={{width: '15px', height: '15px'}} alt=""/>
+              </div> */}
+            </div>
+          </div>
           <UserMenu />
         </>
       }

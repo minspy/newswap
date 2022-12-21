@@ -30,6 +30,7 @@ const sentryWebpackPluginOptions =
 
 /** @type {import('next').NextConfig} */
 const config = {
+  distDir: 'dist',
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
@@ -67,7 +68,7 @@ const config = {
   async headers() {
     return [
       {
-        source: '/logo.png',
+        source: '/images/img/logo.jpg',
         headers: [
           {
             key: 'Cache-Control',
@@ -97,6 +98,11 @@ const config = {
   },
   async redirects() {
     return [
+      {
+        source: '/',
+        destination: '/swap',
+        permanent: true,
+      },
       {
         source: '/send',
         destination: '/swap',
