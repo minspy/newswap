@@ -37,14 +37,14 @@ export function ChoosePair({
       />
       <CardBody>
         <Box>
-          <Text textTransform="uppercase" color="secondary" bold small pb="24px">
+          <Text textTransform="uppercase" color="secondary" bold small pb="24px" style={{ fontSize: '12px' }}>
             {t('Choose a valid pair')}
           </Text>
-          <FlexGap gap="35px">
+          <FlexGap gap="30px">
             <Text />
-            <Text>X(发行的代币）</Text>
+            <Text style={{ fontSize: '12px', whiteSpace: 'nowrap' }}>X(发行的代币）</Text>
             <AddIcon color="textSubtle" />
-            <Text>Y(募集的代币）</Text>
+            <Text style={{ fontSize: '12px', whiteSpace: 'nowrap' }}>Y(募集的代币）</Text>
           </FlexGap>
           <FlexGap gap="4px">
             <CurrencySelect
@@ -67,7 +67,9 @@ export function ChoosePair({
       </CardBody>
       <CardFooter>
         {/* exp diff */}
-        <Text textAlign="center">恒定乘积公式 XY^0.5=K</Text>
+        <Text textAlign="center" style={{ fontSize: '14px' }}>
+          恒定乘积公式 XY^0.5=K
+        </Text>
         {!account ? (
           <ConnectWalletButton width="100%" />
         ) : (
@@ -76,6 +78,7 @@ export function ChoosePair({
             width="100%"
             variant={!isValid ? 'danger' : 'primary'}
             onClick={onNext}
+            style={{ marginTop: '10px' }}
             disabled={!isValid}
           >
             {error ?? t('Add Liquidity')}

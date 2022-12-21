@@ -28,7 +28,7 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
 
   return (
     <AppHeaderContainer>
-      <Flex alignItems="center" width="100%" style={{ gap: '16px' }}>
+      <Flex alignItems="center" width="100%" style={{ gap: '0' }}>
         {backTo &&
           (typeof backTo === 'string' ? (
             <Link passHref href={backTo}>
@@ -43,7 +43,9 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
           ))}
         <Flex flexDirection="column" width="100%">
           <Flex mb="8px" alignItems="center" justifyContent="space-between">
-            <Heading as="h2">{title}</Heading>
+            <Heading as="h2" style={{ fontSize: '18px' }}>
+              {title}
+            </Heading>
             {!noConfig && (
               <Flex alignItems="center">
                 {/* <NotificationDot show={expertMode}>
@@ -55,7 +57,7 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
           </Flex>
           <Flex alignItems="center">
             {helper && <QuestionHelper text={helper} mr="4px" placement="top-start" />}
-            <Text color="textSubtle" fontSize="14px">
+            <Text color="textSubtle" fontSize="12px">
               {subtitle}
             </Text>
           </Flex>
