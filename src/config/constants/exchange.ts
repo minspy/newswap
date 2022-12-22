@@ -4,8 +4,8 @@ import { bscTokens, bscTestnetTokens } from './tokens'
 import { ChainTokenList } from './types'
 
 export const ROUTER_ADDRESS = {
-  [ChainId.BSC]: '0xdbcd19c12bff47378daecb2c25d2679ed30aa5f2',
-  [ChainId.BSC_TESTNET]: '0xdbcd19c12bff47378daecb2c25d2679ed30aa5f2',
+  [ChainId.BSC]: '0x6941CD0d6EF3E4c1294b85fe6EF275AA6C4691fb',
+  [ChainId.BSC_TESTNET]: '0x6941CD0d6EF3E4c1294b85fe6EF275AA6C4691fb',
 }
 
 // used to construct intermediary pairs for trading
