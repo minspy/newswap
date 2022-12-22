@@ -276,7 +276,7 @@ export default function AddLiquidity() {
         (tokenBIsBNB ? parsedAmountA : parsedAmountB).raw.toString(), // token desired
         amountsMin[tokenBIsBNB ? Field.CURRENCY_A : Field.CURRENCY_B].toString(), // token min
         amountsMin[tokenBIsBNB ? Field.CURRENCY_B : Field.CURRENCY_A].toString(), // eth min
-        ammType + 1,
+        ammType,
         account,
         deadline.toHexString(),
       ]
@@ -303,7 +303,7 @@ export default function AddLiquidity() {
         parsedAmountB.raw.toString(),
         amountsMin[Field.CURRENCY_A].toString(),
         amountsMin[Field.CURRENCY_B].toString(),
-        ammType + 1,
+        ammType,
         account,
         deadline.toHexString(),
       ]

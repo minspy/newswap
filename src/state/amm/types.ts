@@ -6,9 +6,9 @@ export interface State {
 
 export const enum AmmType {
   /** 1: 1 */
-  Default,
-  /** 2: 1 */
-  Five,
+  Default = 1,
   /** 3: 4 */
-  SevenFive,
+  SevenFive = 2,
+  /** 2: 1 */
+  Five = 3,
 }
