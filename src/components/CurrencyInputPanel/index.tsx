@@ -31,7 +31,7 @@ const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm'
     css`
       padding: 8px;
       // background: ${theme.colors.background};
-      border: 1px solid ${theme.colors.cardBorder};
+      // border: 1px solid ${theme.colors.cardBorder};
       border-radius: ${zapStyle === 'zap' ? '0px' : '8px'} 8px 0px 0px;
       height: auto;
     `};

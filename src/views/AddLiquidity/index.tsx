@@ -581,20 +581,20 @@ export default function AddLiquidity() {
   const swapFormulaList = [
     {
       label: 'SWAP1',
-      value: 'P=Y/X'
+      value: 'P=Y/X',
     },
     {
       label: 'SWAP2',
-      value: 'P=4Y/3X'
+      value: 'P=4Y/3X',
     },
     {
       label: 'SWAP3',
-      value: 'P=2Y/X'
-    }
+      value: 'P=2Y/X',
+    },
   ]
-  
+
   return (
-    <Page style={{background: '#91C5F5'}}>
+    <Page style={{ background: '#91C5F5' }}>
       <AppBody>
         {!showAddLiquidity && (
           <ChoosePair
@@ -606,7 +606,11 @@ export default function AddLiquidity() {
         )}
         {showAddLiquidity && (
           <>
-            <AmmSwitch swapSelect={swapSelect} setSwapSelect={setSwapSelect} backTo={canZap ? () => setSteps(Steps.Choose) : '/liquidity'}/>
+            <AmmSwitch
+              swapSelect={swapSelect}
+              setSwapSelect={setSwapSelect}
+              backTo={canZap ? () => setSteps(Steps.Choose) : '/liquidity'}
+            />
             {/* <AppHeader
               title={
                 currencies[Field.CURRENCY_A]?.symbol && currencies[Field.CURRENCY_B]?.symbol
@@ -641,34 +645,30 @@ export default function AddLiquidity() {
                   //     </div>
                   //   </Message>
                   // </ColumnCenter>
-                      <div style={{
-                          fontFamily: 'Inter',
-                          fontStyle: 'normal',
-                          fontWeight: 400,
-                          fontSize: '10px',
-                          lineHeight: '16px',
-                          color: '#4263EB'
-                        }}>
-                        <span>
-                          {t('You are the first liquidity provider.')}
-                        </span>
-                        <span>{t('The ratio of tokens you add will set the price of this pool.')}</span>
-                        <span>{t('Once you are happy with the rate click supply to review.')}</span>
-                      </div>
-                )}
-                
-                <Text textAlign="center">
-                  <div style={{display: 'flex', justifyContent: 'center', marginTop: '0px'}}>
-                  <Text style={{marginRight: '20px'}}>
-                  {swapFormulaList[swapSelect - 1].label}
-                  </Text>
-                  <Text>
-                  {swapFormulaList[swapSelect - 1].value}
-                  </Text>
+                  <div
+                    style={{
+                      fontFamily: 'Inter',
+                      fontStyle: 'normal',
+                      fontWeight: 400,
+                      fontSize: '10px',
+                      lineHeight: '16px',
+                      color: '#4263EB',
+                    }}
+                  >
+                    <span>{t('You are the first liquidity provider.')}</span>
+                    <span>{t('The ratio of tokens you add will set the price of this pool.')}</span>
+                    <span>{t('Once you are happy with the rate click supply to review.')}</span>
                   </div>
-                {/* 恒定乘积公式 XY^0.5=K */}
+                )}
+
+                <Text textAlign="center">
+                  <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
+                    <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
+                    <Text>{swapFormulaList[swapSelect - 1].value}</Text>
+                  </div>
+                  {/* 恒定乘积公式 XY^0.5=K */}
                 </Text>
-                
+
                 {noLiquidity && (
                   <PriceInputPanel
                     showBUSD
@@ -697,7 +697,7 @@ export default function AddLiquidity() {
                     commonBasesTypeBottomToken={CommonBasesType.LIQUIDITY}
                   />
                 )}
-                    {/* otherCurrencyBottomToken={} */}
+                {/* otherCurrencyBottomToken={} */}
                 <CurrencyInputPanel
                   disableCurrencySelect={canZap}
                   showBUSD
@@ -850,7 +850,7 @@ export default function AddLiquidity() {
                   </RowFixed>
                 )}
 
-                {/* {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+                {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
                   <>
                     <LightCard padding="0px" borderRadius="20px">
                       <RowBetween padding="1rem">
@@ -866,64 +866,68 @@ export default function AddLiquidity() {
                       </LightCard>
                     </LightCard>
                   </>
-                )} */}
+                )}
 
-                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
-                  <Text bold fontSize="12px" color="secondary" style={{color: '#333333', fontSize: '12px'}}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                  <Text bold fontSize="12px" color="secondary" style={{ color: '#333333', fontSize: '12px' }}>
                     {t('Slippage Tolerance')}
                   </Text>
-                  <Text bold color="primary" style={{marginLeft: '10px', color: '#333333', fontSize: '12px'}}>
+                  <Text bold color="primary" style={{ marginLeft: '10px', color: '#333333', fontSize: '12px' }}>
                     {allowedSlippage / 100}%
                   </Text>
                 </div>
 
-                <div style={{
-                  background: '#EDF3F9', 
-                  padding: '14px 16px', 
-                  borderRadius: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                  }}>
-                    <div style={{
+                <div
+                  style={{
+                    background: '#EDF3F9',
+                    padding: '14px 16px',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div
+                    style={{
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
-                      fontWeight: '400'
-                    }}>
-                      <span style={{color: '#333333', fontSize: '14px'}}>-</span>
-                      <span  style={{color: '#111526', fontSize: '12px', marginTop: '8px'}}>USDT per BNB</span>
-                    </div>
-                    <div style={{
+                      fontWeight: '400',
+                    }}
+                  >
+                    <span style={{ color: '#333333', fontSize: '14px' }}>-</span>
+                    <span style={{ color: '#111526', fontSize: '12px', marginTop: '8px' }}>USDT per BNB</span>
+                  </div>
+                  <div
+                    style={{
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
-                      fontWeight: '400'
-                    }}>
-                      <span style={{color: '#333333', fontSize: '14px'}}>-</span>
-                      <span style={{color: '#111526', fontSize: '12px', marginTop: '8px'}}>BNB per USDT</span>
-                    </div>
-                    <div style={{
+                      fontWeight: '400',
+                    }}
+                  >
+                    <span style={{ color: '#333333', fontSize: '14px' }}>-</span>
+                    <span style={{ color: '#111526', fontSize: '12px', marginTop: '8px' }}>BNB per USDT</span>
+                  </div>
+                  <div
+                    style={{
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
-                      fontWeight: '400'
-                    }}>
-                      <span style={{color: '#333333', fontSize: '14px'}}>-</span>
-                      <span style={{color: '#111526', fontSize: '12px', marginTop: '8px'}}>Share of Poll</span>
-                    </div>
-                </div> 
+                      fontWeight: '400',
+                    }}
+                  >
+                    <span style={{ color: '#333333', fontSize: '14px' }}>-</span>
+                    <span style={{ color: '#111526', fontSize: '12px', marginTop: '8px' }}>Share of Poll</span>
+                  </div>
+                </div>
 
                 <Text textAlign="center">
-                  <div style={{display: 'flex', justifyContent: 'center', marginTop: '0px'}}>
-                  <Text style={{marginRight: '20px'}}>
-                  {swapFormulaList[swapSelect - 1].label}
-                  </Text>
-                  <Text>
-                  {swapFormulaList[swapSelect - 1].value}
-                  </Text>
+                  <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
+                    <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
+                    <Text>{swapFormulaList[swapSelect - 1].value}</Text>
                   </div>
-                {/* 恒定乘积公式 XY^0.5=K */}
+                  {/* 恒定乘积公式 XY^0.5=K */}
                 </Text>
 
                 {pair && poolData && (
@@ -980,7 +984,7 @@ export default function AddLiquidity() {
                       isLoading={preferZapInstead && zapInEstimating}
                       variant={!isValid || zapIn.priceSeverity > 2 ? 'danger' : 'primary'}
                       style={{
-                        background: '#101528'
+                        background: '#101528',
                       }}
                       onClick={() => {
                         if (preferZapInstead) {
