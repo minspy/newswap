@@ -1,4 +1,4 @@
-import Web3 from 'Web3'
+import Web3 from 'web3'
 import Link from 'next/link'
 import { useCallback, useMemo, useState } from 'react'
 import { Text, Input, CardBody, Button, IconButton, ArrowBackIcon } from '@pancakeswap/uikit'

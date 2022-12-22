@@ -1,4 +1,4 @@
-import Web3 from 'Web3'
+import Web3 from 'web3'
 import { parse } from 'qs'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
