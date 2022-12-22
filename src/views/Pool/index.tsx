@@ -124,11 +124,11 @@ export default function Pool() {
           )}
         </Body>
         <CardFooter style={{ textAlign: 'center' }}>
-          <Button id="join-pool-button" width="100%" style={{background: '#4263EB', marginBottom: '16px'}} onClick={()=>{
-            setIsAddWhitelist(true)
-          }}>
-           添加白名单
-          </Button>
+          <Link href="/whitelist" passHref>
+            <Button id="join-pool-button" width="100%" style={{background: '#4263EB', marginBottom: '16px'}}>
+              添加白名单
+            </Button>
+          </Link>
           <Link href="/add" passHref>
             <Button id="join-pool-button" width="100%" style={{background: '#111526'}} startIcon={<AddIcon color="white"  />}>
               {t('Add Liquidity')}
