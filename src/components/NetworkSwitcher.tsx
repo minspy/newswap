@@ -32,7 +32,7 @@ export const NetworkSwitcher = () => {
     return (
       <UserMenu
         mr="8px"
-        avatarSrc={`https://cdn.pancakeswap.com/chains/${chainId}.png`}
+        avatarSrc={`/images/chains/${chainId}.png`}
         account={bscTest.name}
         ellipsis={false}
       >
