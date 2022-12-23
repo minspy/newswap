@@ -91,7 +91,7 @@ export default function Pool() {
   })
 
   return (
-    !isAddWhitelist ? (<Page style={{background: '#91C5F5'}}>
+    !isAddWhitelist ? (<Page>
       <AppBody>
         <AppHeader title={t('Your Liquidity')} subtitle={t('Remove liquidity to receive tokens back')} />
         <div style={{
@@ -138,7 +138,7 @@ export default function Pool() {
       </AppBody>
     </Page>)
     : 
-    (<Page style={{background: '#91C5F5'}}>
+    (<Page>
     <AppBody>
       <div style={{
         padding: '0 17px',

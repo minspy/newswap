@@ -373,7 +373,7 @@ export default function Swap() {
   const isChartSupported = useMemo(() => CHART_SUPPORT_CHAIN_IDS.includes(chainId), [chainId])
 
   return (
-    <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded} style={{background: '#9BC5F2', padding: '30px 0'}}>
+    <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
       <Flex width="100%" justifyContent="center" position="relative">
         {!isMobile && isChartSupported && (
           <PriceChartContainer

@@ -303,7 +303,6 @@ const LimitOrders = () => {
       hideFooterOnDesktop={isSideFooter}
       noMinHeight
       helpUrl={LIMIT_ORDERS_DOCS_URL}
-      style={{background: '#91C5F5'}}
     >
       <ClaimWarning />
       <Flex

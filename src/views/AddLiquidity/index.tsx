@@ -594,7 +594,7 @@ export default function AddLiquidity() {
   ]
 
   return (
-    <Page style={{ background: '#91C5F5' }}>
+    <Page>
       <AppBody>
         {!showAddLiquidity && (
           <ChoosePair
