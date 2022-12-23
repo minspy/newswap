@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 import {
-  ChartIcon,
   Flex,
   Heading,
   HistoryIcon,
+  NotificationDot,
   IconButton,
   Text,
   useModal,
-  ChartDisableIcon,
 } from '@pancakeswap/uikit'
 import TransactionsModal from 'components/App/Transactions/TransactionsModal'
 import GlobalSettings from 'components/Menu/GlobalSettings'
@@ -64,10 +63,13 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = ({
         <Flex flexDirection="column" alignItems="flex-start" width="100%" mr={18}>
           <Heading as="h2">{title}</Heading>
           <Text color="textSubtle" fontSize="14px">
-          {subtitle}
-        </Text>
+            {subtitle}
+          </Text>
         </Flex>
         <Flex>
+          <NotificationDot show={expertMode}>
+            <GlobalSettings color="textSubtle" mr="0" mode={SettingsMode.SWAP_LIQUIDITY} />
+          </NotificationDot>
           <IconButton onClick={onPresentTransactionsModal} variant="text" scale="sm">
             <HistoryIcon color="textSubtle" width="24px" />
           </IconButton>
