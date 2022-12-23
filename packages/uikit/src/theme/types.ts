@@ -54,6 +54,7 @@ export type Colors = {
   dropdownDeep: string;
   invertedContrast: string;
   input: string;
+  inputCat: string;
   inputSecondary: string;
   background: string;
   backgroundDisabled: string;

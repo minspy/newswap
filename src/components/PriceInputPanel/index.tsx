@@ -54,8 +54,8 @@ const InputPanel = styled.div`
   background-color: ${({ theme }) => theme.colors.backgroundAlt};
   z-index: 1;
   background: #e8f3ff;
-  border: 1px solid #000000;
-  border-radius: 12px;
+  border: 1px solid ${({ theme }) => theme.colors.inputCat};
+  border-radius: ${({ theme }) => theme.radii.default};
   overflow: hidden;
 `
 const Container = styled.div<{ zapStyle?: ZapStyle; error?: boolean }>`

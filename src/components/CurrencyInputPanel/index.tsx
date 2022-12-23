@@ -54,16 +54,10 @@ const InputPanel = styled.div`
   z-index: 1;
 `
 const Container = styled.div<{ zapStyle?: ZapStyle; error?: boolean }>`
-  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.colors.inputCat};
+  border-radius: ${({ theme }) => theme.radii.default};
   background-color: ${({ theme }) => theme.colors.input};
   box-shadow: ${({ theme, error }) => theme.shadows[error ? 'warning' : 'inset']};
-  ${({ zapStyle }) =>
-    !!zapStyle &&
-    css`
-      border-radius: 0px 16px 16px 16px;
-    `};
-  border: 1px solid #000000;
-  border-radius: 12px;
 `
 
 const Overlay = styled.div`
