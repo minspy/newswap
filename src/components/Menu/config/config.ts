@@ -67,6 +67,23 @@ const config: (
         }, */
       ].filter((item) => filterItemBySupportChainId(item, chainId)),
     },
+    {
+      label: t('Add'),
+      icon: SwapIcon,
+      fillIcon: SwapFillIcon,
+      href: '/add',
+      showItemsOnMobile: false,
+      items: [
+        {
+          label: t('Swap'),
+          href: '/swap',
+        },
+        {
+          label: t('Liquidity'),
+          href: '/add',
+        },
+      ].filter((item) => filterItemBySupportChainId(item, chainId)),
+    },
   ].filter((item) => filterItemBySupportChainId(item, chainId))
 
 export default config
