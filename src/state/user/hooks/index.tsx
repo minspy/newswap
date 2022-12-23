@@ -59,23 +59,6 @@ export function useAudioModeManager(): [boolean, () => void] {
   return [audioPlay, toggleSetAudioMode]
 }
 
-export function usePhishingBannerManager(): [boolean, () => void] {
-  const dispatch = useAppDispatch()
-  const hideTimestampPhishingWarningBanner = useSelector<
-    AppState,
-    AppState['user']['hideTimestampPhishingWarningBanner']
-  >((state) => state.user.hideTimestampPhishingWarningBanner)
-  const now = Date.now()
-  const showPhishingWarningBanner = hideTimestampPhishingWarningBanner
-    ? differenceInDays(now, hideTimestampPhishingWarningBanner) >= 1
-    : true
-  const hideBanner = useCallback(() => {
-    dispatch(hidePhishingWarningBanner())
-  }, [dispatch])
-
-  return [showPhishingWarningBanner, hideBanner]
-}
-
 // Get user preference for exchange price chart
 // For mobile layout chart is hidden by default
 export function useExchangeChartManager(isMobile: boolean): [boolean, (isDisplayed: boolean) => void] {
