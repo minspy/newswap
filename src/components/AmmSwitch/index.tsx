@@ -106,15 +106,6 @@ const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({swapSelect, setSwa
         SWAP3
       </Button>
       </div>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center'
-      }}>
-        <NotificationDot show={expertMode}>
-          <GlobalSettings mode={SettingsMode.SWAP_LIQUIDITY} />
-        </NotificationDot>
-        <Transactions />
-      </div>
     </div>
   )
 }

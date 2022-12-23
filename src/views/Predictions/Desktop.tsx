@@ -71,7 +71,7 @@ const StyledDesktop = styled.div`
 
   ${({ theme }) => theme.mediaQueries.lg} {
     display: flex;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 365px);
   }
 `
 

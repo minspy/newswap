@@ -17,11 +17,9 @@ import {
 } from '@pancakeswap/uikit'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
-import Footer from 'components/Menu/Footer'
 import { useRouter } from 'next/router'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useTranslation } from '@pancakeswap/localization'
-import { EXCHANGE_DOCS_URLS } from 'config/constants'
 import { BIG_INT_ZERO } from 'config/constants/exchange'
 import { maxAmountSpend } from 'utils/maxAmountSpend'
 import shouldShowSwapWarning from 'utils/shouldShowSwapWarning'
@@ -630,11 +628,6 @@ export default function Swap() {
               )}
             </StyledInputCurrencyWrapper>
           </StyledSwapContainer>
-          {isChartExpanded && (
-            <Box display={['none', null, null, 'block']} width="100%" height="100%">
-              <Footer variant="side" helpUrl={EXCHANGE_DOCS_URLS} />
-            </Box>
-          )}
         </Flex>
       </Flex>
     </Page>

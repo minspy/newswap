@@ -5,7 +5,6 @@ import {
   Heading,
   HistoryIcon,
   IconButton,
-  NotificationDot,
   Text,
   useModal,
   ChartDisableIcon,
@@ -69,9 +68,6 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = ({
         </Text>
         </Flex>
         <Flex>
-          <NotificationDot show={expertMode}>
-            <GlobalSettings color="textSubtle" mr="0" mode={SettingsMode.SWAP_LIQUIDITY} />
-          </NotificationDot>
           <IconButton onClick={onPresentTransactionsModal} variant="text" scale="sm">
             <HistoryIcon color="textSubtle" width="24px" />
           </IconButton>

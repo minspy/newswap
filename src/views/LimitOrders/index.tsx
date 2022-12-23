@@ -8,7 +8,6 @@ import { AutoColumn } from 'components/Layout/Column'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import { AppBody } from 'components/App'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import Footer from 'components/Menu/Footer'
 import useGelatoLimitOrders from 'hooks/limitOrders/useGelatoLimitOrders'
 import useGasOverhead from 'hooks/limitOrders/useGasOverhead'
 import useTheme from 'hooks/useTheme'
@@ -445,11 +444,6 @@ const LimitOrders = () => {
             <Flex mt="24px" width="100%">
               <LimitOrderTable isCompact />
             </Flex>
-          )}
-          {isSideFooter && (
-            <Box display={['none', null, null, 'block']} width="100%" height="100%">
-              <Footer variant="side" helpUrl={LIMIT_ORDERS_DOCS_URL} />
-            </Box>
           )}
         </Flex>
       </Flex>

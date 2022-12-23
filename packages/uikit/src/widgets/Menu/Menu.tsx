@@ -1,7 +1,6 @@
 import throttle from "lodash/throttle";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import BottomNav from "../../components/BottomNav";
 import { Box } from "../../components/Box";
 import Flex from "../../components/Box/Flex";
 import Footer from "../../components/Footer";
@@ -184,7 +183,6 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
             />
           </Inner>
         </BodyWrapper>
-        {isMobile && <BottomNav items={links} activeItem={activeItem} activeSubItem={activeSubItem} />}
       </Wrapper>
     </MenuContext.Provider>
   );

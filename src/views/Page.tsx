@@ -1,8 +1,5 @@
 import styled from 'styled-components'
-import { Box, Flex } from '@pancakeswap/uikit'
-import Footer from 'components/Menu/Footer'
 import { PageMeta } from 'components/Layout/Page'
-import { EXCHANGE_DOCS_URLS } from 'config/constants'
 
 const StyledPage = styled.div<{ $removePadding: boolean; $noMinHeight }>`
   display: flex;
@@ -28,7 +25,7 @@ const StyledPage = styled.div<{ $removePadding: boolean; $noMinHeight }>`
   ${({ theme }) => theme.mediaQueries.lg} {
     padding: ${({ $removePadding }) => ($removePadding ? '0' : '32px')};
     padding-bottom: 0;
-    min-height: ${({ $noMinHeight }) => ($noMinHeight ? 'initial' : 'calc(100vh - 100px)')};
+    min-height: ${({ $noMinHeight }) => ($noMinHeight ? 'initial' : 'calc(100vh - 365px)')};
   }
 `
 
@@ -44,9 +41,7 @@ const Page: React.FC<
 > = ({
   children,
   removePadding = false,
-  hideFooterOnDesktop = false,
   noMinHeight = false,
-  helpUrl = EXCHANGE_DOCS_URLS,
   ...props
 }) => {
   return (
@@ -54,10 +49,6 @@ const Page: React.FC<
       <PageMeta />
       <StyledPage $removePadding={removePadding} $noMinHeight={noMinHeight} {...props}>
         {children}
-        <Flex flexGrow={1} />
-        <Box display={['block', null, null, hideFooterOnDesktop ? 'none' : 'block']} width="100%">
-          <Footer helpUrl={helpUrl} />
-        </Box>
       </StyledPage>
     </>
   )

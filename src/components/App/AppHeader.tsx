@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Text, Flex, Heading, IconButton, ArrowBackIcon, NotificationDot } from '@pancakeswap/uikit'
+import { Text, Flex, Heading, IconButton, ArrowBackIcon } from '@pancakeswap/uikit'
 import { useExpertModeManager } from 'state/user/hooks'
 import GlobalSettings from 'components/Menu/GlobalSettings'
 import Link from 'next/link'
@@ -46,14 +46,6 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
             <Heading as="h2" style={{ fontSize: '18px' }}>
               {title}
             </Heading>
-            {!noConfig && (
-              <Flex alignItems="center">
-                {/* <NotificationDot show={expertMode}>
-                  <GlobalSettings mode={SettingsMode.SWAP_LIQUIDITY} />
-                </NotificationDot>
-                <Transactions /> */}
-              </Flex>
-            )}
           </Flex>
           <Flex alignItems="center">
             {helper && <QuestionHelper text={helper} mr="4px" placement="top-start" />}
