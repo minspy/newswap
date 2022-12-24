@@ -7,7 +7,7 @@ const StyledPage = styled.div<{ $removePadding: boolean; $noMinHeight }>`
   align-items: center;
   width: 100%;
   padding: ${({ $removePadding }) => ($removePadding ? '0' : '16px')};
-  padding-bottom: 0;
+  padding-bottom: 18px;
   min-height: ${({ $noMinHeight }) => ($noMinHeight ? 'initial' : 'calc(100vh - 364px)')};
   background: ${({ theme }) => {
     return theme.colors.backgroundCat
@@ -19,12 +19,12 @@ const StyledPage = styled.div<{ $removePadding: boolean; $noMinHeight }>`
 
   ${({ theme }) => theme.mediaQueries.sm} {
     padding: ${({ $removePadding }) => ($removePadding ? '0' : '24px')};
-    padding-bottom: 0;
+    padding-bottom: 30px;
   }
 
   ${({ theme }) => theme.mediaQueries.lg} {
     padding: ${({ $removePadding }) => ($removePadding ? '0' : '32px')};
-    padding-bottom: 0;
+    padding-bottom: 30px;
     min-height: ${({ $noMinHeight }) => ($noMinHeight ? 'initial' : 'calc(100vh - 365px)')};
   }
 `
