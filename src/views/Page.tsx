@@ -25,7 +25,7 @@ const StyledPage = styled.div<{ $removePadding: boolean; $noMinHeight }>`
   ${({ theme }) => theme.mediaQueries.lg} {
     padding: ${({ $removePadding }) => ($removePadding ? '0' : '32px')};
     padding-bottom: 30px;
-    min-height: ${({ $noMinHeight }) => ($noMinHeight ? 'initial' : 'calc(100vh - 365px)')};
+    min-height: ${({ $noMinHeight }) => ($noMinHeight ? 'initial' : 'calc(100vh - 265px)')};
   }
 `
 

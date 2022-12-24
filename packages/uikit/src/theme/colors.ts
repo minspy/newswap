@@ -21,6 +21,8 @@ export const additionalColors = {
 export const lightColors: Colors = {
   ...baseColors,
   ...additionalColors,
+  light: '#fff',
+  dark: '#000',
   background: "#FAF9FA",
   backgroundCat: "#9BC5F2",
   backgroundDisabled: "#E9EAEB",
@@ -53,6 +55,8 @@ export const lightColors: Colors = {
 export const darkColors: Colors = {
   ...baseColors,
   ...additionalColors,
+  light: '#000',
+  dark: '#fff',
   secondary: "#9A6AFF",
   background: "#08060B",
   backgroundDisabled: "#3c3742",
