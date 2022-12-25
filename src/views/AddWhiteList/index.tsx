@@ -1,12 +1,12 @@
 import Web3 from 'web3'
 import Link from 'next/link'
 import { useCallback, useMemo, useState } from 'react'
-import { Text, Input, CardBody, Button, IconButton, ArrowBackIcon } from '@pancakeswap/uikit'
+import { Text, CardBody, Button, IconButton, ArrowBackIcon } from '@pancakeswap/uikit'
 import { AutoColumn } from 'components/Layout/Column'
 import { useWeb3React } from '@web3-react/core'
 import { splitTransferInputData } from 'utils/transaction'
 import ERC20_ABI from 'config/abi/erc20.json'
-
+import AddressInputArea from 'components/AddressInputArea'
 import useToast from 'hooks/useToast'
 
 import { bscTest } from '../../../packages/wagmi/src/chains'
@@ -19,7 +19,7 @@ const OwnerAddress = '0x630c2F96a19B80e76e6Ebf15a2C9166265744320'
 
 const Subtitle: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <Text fontSize="12px" textTransform="uppercase" bold color="secondary">
+    <Text fontSize="12px" textTransform="uppercase" color="dark">
       {children}
     </Text>
   )
@@ -164,62 +164,44 @@ export default function AddWhiteList() {
     <Page>
       <AppBody>
         <CardBody>
-          <Link href="/liquidity" passHref>
-            <div style={{ padding: '0 0 14px 0' }}>
-              <IconButton as="a" scale="sm">
-                <ArrowBackIcon width="22px" />
-              </IconButton>
-            </div>
-          </Link>
-          <div
-            style={{
-              fontFamily: 'Inter',
-              fontSize: '12px',
-              fontStyle: 'normal',
-              lineHeight: '15px',
-              color: '#111526',
-              marginBottom: '15px',
-            }}
-          >
-            首次添加流动性需要代币创建者输入钱包地址和代币合约设置白名单，若代币创建者添加流动性将创建代币的钱包设置为白名单，若其他钱包添加流动性，将对应的钱包设置为白名单。设置白名单后，便可以选择三个swap中的一个添加流动性。
-            需要注意的是一个交易对在一个swap中添加流动性后，其他两个swap不能再添加流动性，这样可以防止用户选择错误造成资金损失。
-          </div>
           <AutoColumn gap="20px">
-            <Subtitle>白名单地址</Subtitle>
-            <Input
-              disabled={loading}
-              onChange={(event) => {
-                setWhiteListAddress(event.target.value)
-              }}
-            />
+            <Link href="/liquidity" passHref>
+              <div style={{ padding: '0 0 14px 0' }}>
+                <IconButton as="a" scale="sm">
+                  <ArrowBackIcon width="22px" />
+                </IconButton>
+              </div>
+            </Link>
+            <Text color="dark" fontSize="12px">
+              首次添加流动性需要代币创建者输入钱包地址和代币合约设置白名单，若代币创建者添加流动性将创建代币的钱包设置为白名单，若其他钱包添加流动性，将对应的钱包设置为白名单。设置白名单后，便可以选择三个swap中的一个添加流动性。
+              需要注意的是一个交易对在一个swap中添加流动性后，其他两个swap不能再添加流动性，这样可以防止用户选择错误造成资金损失。
+            </Text>
+            <AutoColumn gap="10px">
+              <Subtitle>白名单地址</Subtitle>
+              <AddressInputArea
+                disabled={loading}
+                onChange={(event) => {
+                  setWhiteListAddress(event.target.value)
+                }}
+              />
+            </AutoColumn>
+            <AutoColumn gap="10px">
+              <Subtitle>代币合约</Subtitle>
+              <AddressInputArea
+                disabled={loading}
+                onChange={(event) => {
+                  setToken(event.target.value)
+                }}
+              />
+            </AutoColumn>
+            <Text fontSize="12px" color="textDisabled">
+              代币创建者，可以设置首次添加流动性的白名单钱包地址，
+              输入首次添加LP的钱包地址（可以是该地址也可以是其他地址）并支付10u，对应的钱包地址便可以作为首次添加LP的钱包地址，首次添加lp之后其他所有地址都可以添加流动性，当交易额达100000u，以上时我们将会原路退回10u。
+            </Text>
+            <Button width="100%" onClick={handleSupply} disabled={disableSupply} isLoading={loading}>
+              {btnText}
+            </Button>
           </AutoColumn>
-          <div style={{ height: '20px'}} />
-          <AutoColumn gap="20px">
-            <Subtitle>代币合约</Subtitle>
-            <Input
-              disabled={loading}
-              onChange={(event) => {
-                setToken(event.target.value)
-              }}
-            />
-          </AutoColumn>
-          <div
-            style={{
-              fontFamily: 'Inter',
-              fontStyle: 'normal',
-              fontWeight: 400,
-              fontSize: '12px',
-              lineHeight: '15px',
-              color: '#AAAAAA',
-              marginTop: '5px',
-            }}
-          >
-            你是代币创建者，可以设置首次添加流动性的白名单钱包地址，
-            输入首次添加LP的钱包地址（可以是该地址也可以是其他地址）并支付10u，对应的钱包地址便可以作为首次添加LP的钱包地址，首次添加lp之后其他所有地址都可以添加流动性，当交易额达100000u，以上时我们将会原路退回10u。
-          </div>
-          <Button width="100%" mt="20px" onClick={handleSupply} disabled={disableSupply} isLoading={loading}>
-            {btnText}
-          </Button>
         </CardBody>
       </AppBody>
     </Page>
