@@ -660,7 +660,6 @@ export default function AddLiquidity() {
                     <span>{t('Once you are happy with the rate click supply to review.')}</span>
                   </div>
                 )}
-
                 <Text textAlign="center">
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
@@ -668,7 +667,6 @@ export default function AddLiquidity() {
                   </div>
                   {/* 恒定乘积公式 XY^0.5=K */}
                 </Text>
-
                 {noLiquidity && (
                   <PriceInputPanel
                     showBUSD
@@ -729,9 +727,11 @@ export default function AddLiquidity() {
                   commonBasesType={CommonBasesType.LIQUIDITY}
                   label="X"
                 />
-                <ColumnCenter>
-                  <AddIcon width="16px" />
-                </ColumnCenter>
+                <div style={{ height: 0 }}>
+                  <ColumnCenter>
+                    <AddIcon width="16px" />
+                  </ColumnCenter>
+                </div>
                 <CurrencyInputPanel
                   showBUSD
                   onInputBlur={zapIn.onInputBlurOnce}
@@ -763,7 +763,6 @@ export default function AddLiquidity() {
                   commonBasesType={CommonBasesType.LIQUIDITY}
                   label="Y"
                 />
-
                 {showZapWarning && (
                   <Message variant={zapIn.priceSeverity > 3 ? 'danger' : 'warning'}>
                     {zapIn.priceSeverity > 3 ? (
@@ -788,7 +787,6 @@ export default function AddLiquidity() {
                     )}
                   </Message>
                 )}
-
                 {showReduceZapTokenButton && (
                   <RowFixed style={{ margin: 'auto' }} onClick={() => zapIn.convertToMaxZappable()}>
                     <Button variant="secondary" scale="sm">
@@ -796,7 +794,6 @@ export default function AddLiquidity() {
                     </Button>
                   </RowFixed>
                 )}
-
                 {showZapIsAvailable && (
                   <Message variant="warning">
                     <MessageText>
@@ -808,7 +805,6 @@ export default function AddLiquidity() {
                     </MessageText>
                   </Message>
                 )}
-
                 {showRebalancingConvert && (
                   <Message variant="warning">
                     <AutoColumn>
@@ -832,7 +828,6 @@ export default function AddLiquidity() {
                     </AutoColumn>
                   </Message>
                 )}
-
                 {showRebalancingConvert && (
                   <RowFixed
                     style={{ margin: 'auto' }}
@@ -849,8 +844,7 @@ export default function AddLiquidity() {
                     </Button>
                   </RowFixed>
                 )}
-
-                {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+                {/* {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
                   <>
                     <LightCard padding="0px" borderRadius="20px">
                       <RowBetween padding="1rem">
@@ -866,8 +860,7 @@ export default function AddLiquidity() {
                       </LightCard>
                     </LightCard>
                   </>
-                )}
-
+                )} */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                   <Text bold fontSize="12px" color="secondary" style={{ color: '#333333', fontSize: '12px' }}>
                     {t('Slippage Tolerance')}
@@ -876,7 +869,6 @@ export default function AddLiquidity() {
                     {allowedSlippage / 100}%
                   </Text>
                 </div>
-
                 <div
                   style={{
                     background: '#EDF3F9',
@@ -921,7 +913,6 @@ export default function AddLiquidity() {
                     <span style={{ color: '#111526', fontSize: '12px', marginTop: '8px' }}>Share of Poll</span>
                   </div>
                 </div>
-
                 <Text textAlign="center">
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
@@ -929,7 +920,6 @@ export default function AddLiquidity() {
                   </div>
                   {/* 恒定乘积公式 XY^0.5=K */}
                 </Text>
-
                 {pair && poolData && (
                   <RowBetween>
                     <TooltipText ref={targetRef} bold fontSize="12px" color="secondary">
@@ -941,7 +931,6 @@ export default function AddLiquidity() {
                     </Text>
                   </RowBetween>
                 )}
-
                 {addIsUnsupported || addIsWarning ? (
                   <Button disabled mb="4px">
                     {t('Unsupported Asset')}
