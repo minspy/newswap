@@ -11,7 +11,7 @@ import useToast from 'hooks/useToast'
 
 import { bscTest } from '../../../packages/wagmi/src/chains'
 import Page from '../Page'
-import { AppHeader, AppBody } from '../../components/App'
+import { AppBody } from '../../components/App'
 
 const UsdcContractAddress = '0x07C7D4aFc839d5FB6ca8d02ffA65e79910c3ef13'
 
