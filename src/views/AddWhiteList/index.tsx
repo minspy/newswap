@@ -8,6 +8,7 @@ import { splitTransferInputData } from 'utils/transaction'
 import ERC20_ABI from 'config/abi/erc20.json'
 import AddressInputArea from 'components/AddressInputArea'
 import useToast from 'hooks/useToast'
+import useTheme from 'hooks/useTheme'
 
 import { bscTest } from '../../../packages/wagmi/src/chains'
 import Page from '../Page'
@@ -32,7 +33,7 @@ function isContractAddress(address: string): boolean {
 
 export default function AddWhiteList() {
   const { account, chainId } = useWeb3React()
-
+  const { theme } = useTheme()
   const { toastSuccess, toastInfo, toastError } = useToast()
 
   const [btnText, setBtnText] = useState('Supply 10USDC')
@@ -198,7 +199,13 @@ export default function AddWhiteList() {
               代币创建者，可以设置首次添加流动性的白名单钱包地址，
               输入首次添加LP的钱包地址（可以是该地址也可以是其他地址）并支付10u，对应的钱包地址便可以作为首次添加LP的钱包地址，首次添加lp之后其他所有地址都可以添加流动性，当交易额达100000u，以上时我们将会原路退回10u。
             </Text>
-            <Button width="100%" onClick={handleSupply} disabled={disableSupply} isLoading={loading}>
+            <Button
+              width="100%"
+              style={{ backgroundColor: theme.colors.dark, color: theme.colors.light }}
+              disabled={disableSupply}
+              isLoading={loading}
+              onClick={handleSupply}
+            >
               {btnText}
             </Button>
           </AutoColumn>
