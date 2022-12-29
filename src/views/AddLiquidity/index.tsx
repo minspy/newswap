@@ -844,23 +844,6 @@ export default function AddLiquidity() {
                     </Button>
                   </RowFixed>
                 )}
-                {/* {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
-                  <>
-                    <LightCard padding="0px" borderRadius="20px">
-                      <RowBetween padding="1rem">
-                        <Text fontSize="14px">{noLiquidity ? t('Pool share') : t('Pool share')}</Text>
-                      </RowBetween>{' '}
-                      <LightCard padding="1rem" borderRadius="20px">
-                        <PoolPriceBar
-                          currencies={currencies}
-                          poolTokenPercentage={preferZapInstead ? zapIn.poolTokenPercentage : poolTokenPercentage}
-                          noLiquidity={noLiquidity}
-                          price={price}
-                        />
-                      </LightCard>
-                    </LightCard>
-                  </>
-                )} */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
                   <Text bold fontSize="12px" color="secondary" style={{ color: '#333333', fontSize: '12px' }}>
                     {t('Slippage Tolerance')}
@@ -869,50 +852,16 @@ export default function AddLiquidity() {
                     {allowedSlippage / 100}%
                   </Text>
                 </div>
-                <div
-                  style={{
-                    background: '#EDF3F9',
-                    padding: '14px 16px',
-                    borderRadius: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      fontWeight: '400',
-                    }}
-                  >
-                    <span style={{ color: '#333333', fontSize: '14px' }}>-</span>
-                    <span style={{ color: '#111526', fontSize: '12px', marginTop: '8px' }}>USDT per BNB</span>
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      fontWeight: '400',
-                    }}
-                  >
-                    <span style={{ color: '#333333', fontSize: '14px' }}>-</span>
-                    <span style={{ color: '#111526', fontSize: '12px', marginTop: '8px' }}>BNB per USDT</span>
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      fontWeight: '400',
-                    }}
-                  >
-                    <span style={{ color: '#333333', fontSize: '14px' }}>-</span>
-                    <span style={{ color: '#111526', fontSize: '12px', marginTop: '8px' }}>Share of Poll</span>
-                  </div>
-                </div>
+                {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+                  <LightCard padding="1rem" borderRadius="20px" backgroundColor="#EDF3F9 !important">
+                    <PoolPriceBar
+                      currencies={currencies}
+                      poolTokenPercentage={preferZapInstead ? zapIn.poolTokenPercentage : poolTokenPercentage}
+                      noLiquidity={noLiquidity}
+                      price={price}
+                    />
+                  </LightCard>
+                )}
                 <Text textAlign="center">
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
