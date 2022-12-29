@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { ChainId, CurrencyAmount, Token, Trade } from '@pancakeswap/sdk'
+import { CurrencyAmount, Token, Trade } from '@pancakeswap/sdk'
 import { computeTradePriceBreakdown, warningSeverity } from 'utils/exchange'
 import {
   Button,
@@ -10,7 +10,6 @@ import {
   useModal,
   Flex,
   IconButton,
-  BottomDrawer,
   ArrowUpDownIcon,
   Skeleton,
   useMatchBreakpointsContext,
@@ -48,7 +47,6 @@ import {
   useDefaultsFromURLSearch,
   useDerivedSwapInfo,
   useSwapState,
-  useSingleTokenSwapInfo,
 } from '../../state/swap/hooks'
 import {
   useExpertModeManager,
@@ -59,7 +57,6 @@ import {
 import CircleLoader from '../../components/Loader/CircleLoader'
 import Page from '../Page'
 import SwapWarningModal from './components/SwapWarningModal'
-import PriceChartContainer from './components/Chart/PriceChartContainer'
 import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
 import CurrencyInputHeader from './components/CurrencyInputHeader'
 import ImportTokenWarningModal from '../../components/ImportTokenWarningModal'
@@ -89,14 +86,11 @@ const SwitchIconButton = styled(IconButton)`
   }
 `
 
-const CHART_SUPPORT_CHAIN_IDS = [ChainId.BSC]
-
 export default function Swap() {
   const router = useRouter()
   const loadedUrlParams = useDefaultsFromURLSearch()
   const { t } = useTranslation()
   const { isMobile } = useMatchBreakpointsContext()
-  const [isChartExpanded, setIsChartExpanded] = useState(false)
   const [userChartPreference, setUserChartPreference] = useExchangeChartManager(isMobile)
   const [isChartDisplayed, setIsChartDisplayed] = useState(userChartPreference)
   const { refreshBlockNumber, isLoading } = useRefreshBlockNumberID()
@@ -156,8 +150,6 @@ export default function Swap() {
   } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const trade = showWrap ? undefined : v2Trade
-
-  const singleTokenPrice = useSingleTokenSwapInfo(inputCurrencyId, inputCurrency, outputCurrencyId, outputCurrency)
 
   const parsedAmounts = showWrap
     ? {
@@ -368,45 +360,12 @@ export default function Swap() {
     }
   }, [hasAmount, refreshBlockNumber])
 
-  const isChartSupported = useMemo(() => CHART_SUPPORT_CHAIN_IDS.includes(chainId), [chainId])
-
   return (
-    <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
+    <Page>
       <Flex width="100%" justifyContent="center" position="relative">
-        {!isMobile && isChartSupported && (
-          <PriceChartContainer
-            inputCurrencyId={inputCurrencyId}
-            inputCurrency={currencies[Field.INPUT]}
-            outputCurrencyId={outputCurrencyId}
-            outputCurrency={currencies[Field.OUTPUT]}
-            isChartExpanded={isChartExpanded}
-            setIsChartExpanded={setIsChartExpanded}
-            isChartDisplayed={isChartDisplayed}
-            currentSwapPrice={singleTokenPrice}
-          />
-        )}
-        {isChartSupported && (
-          <BottomDrawer
-            content={
-              <PriceChartContainer
-                inputCurrencyId={inputCurrencyId}
-                inputCurrency={currencies[Field.INPUT]}
-                outputCurrencyId={outputCurrencyId}
-                outputCurrency={currencies[Field.OUTPUT]}
-                isChartExpanded={isChartExpanded}
-                setIsChartExpanded={setIsChartExpanded}
-                isChartDisplayed={isChartDisplayed}
-                currentSwapPrice={singleTokenPrice}
-                isMobile
-              />
-            }
-            isOpen={isChartDisplayed}
-            setIsOpen={setIsChartDisplayed}
-          />
-        )}
         <Flex flexDirection="column">
-          <StyledSwapContainer $isChartExpanded={isChartExpanded}>
-            <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
+          <StyledSwapContainer $isChartExpanded={false}>
+            <StyledInputCurrencyWrapper mt="0">
               <AppBody>
                 <CurrencyInputHeader
                   title={t('Swap')}
@@ -508,32 +467,38 @@ export default function Swap() {
                           )}
                         </RowBetween>
                         {/* <RowBetween align="center"> */}
-                          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
-                            <Label style={{color: '#333333'}}>{t('Slippage Tolerance')}</Label>
-                            <Text bold color="primary" style={{marginLeft: '10px', color: '#333333'}}>
-                              {allowedSlippage / 100}%
-                            </Text>
-                          </div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                          <Label style={{ color: '#333333' }}>{t('Slippage Tolerance')}</Label>
+                          <Text bold color="primary" style={{ marginLeft: '10px', color: '#333333' }}>
+                            {allowedSlippage / 100}%
+                          </Text>
+                        </div>
                         {/* </RowBetween> */}
                       </AutoColumn>
                     )}
                   </AutoColumn>
-                  <Box mt="0.25rem" >
+                  <Box mt="0.25rem">
                     {swapIsUnsupported ? (
-                      <Button width="100%" disabled >
+                      <Button width="100%" disabled>
                         {t('Unsupported Asset')}
                       </Button>
                     ) : !account ? (
-                      <ConnectWalletButton width="100%"/>
+                      <ConnectWalletButton width="100%" />
                     ) : showWrap ? (
                       <Button width="100%" disabled={Boolean(wrapInputError)} onClick={onWrap}>
                         {wrapInputError ??
                           (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
                       </Button>
                     ) : noRoute && userHasSpecifiedInputOutput ? (
-                      <GreyCard style={{ textAlign: 'center', padding: '0.75rem',background: '#111526' }}>
-                        <Text color="textSubtle"  style={{color: 'white'}}>{t('Insufficient liquidity for this trade.')}</Text>
-                        {singleHopOnly && <Text color="textSubtle" style={{color: 'white'}}>{t('Try enabling multi-hop trades.')}</Text>}
+                      <GreyCard style={{ textAlign: 'center', padding: '0.75rem', background: '#111526' }}>
+                        <Text color="textSubtle" style={{ color: 'white' }}>
+                          {t('Insufficient liquidity for this trade.')}
+                        </Text>
+                        {singleHopOnly && (
+                          <Text color="textSubtle" style={{ color: 'white' }}>
+                            {t('Try enabling multi-hop trades.')}
+                          </Text>
+                        )}
                       </GreyCard>
                     ) : showApproveFlow ? (
                       <RowBetween>
@@ -586,7 +551,7 @@ export default function Swap() {
                     ) : (
                       <Button
                         variant={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'danger' : 'primary'}
-                        style={{background: '#111526'}}
+                        style={{ background: '#111526' }}
                         onClick={() => {
                           if (isExpertMode) {
                             handleSwap()
