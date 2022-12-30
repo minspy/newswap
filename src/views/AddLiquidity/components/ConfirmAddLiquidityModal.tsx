@@ -49,6 +49,9 @@ const ConfirmAddLiquidityModal: React.FC<
 }) => {
   const { t } = useTranslation()
 
+  const currencyAValue = parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)
+  const currencyBValue = parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)
+
   const modalHeader = useCallback(() => {
     return (
       <AddLiquidityModalHeader
@@ -61,11 +64,11 @@ const ConfirmAddLiquidityModal: React.FC<
       >
         <PairDistribution
           title={t('Input')}
-          percent={0.5}
+          percent={Number(currencyAValue) / (Number(currencyAValue) + Number(currencyBValue))}
           currencyA={currencies[Field.CURRENCY_A]}
-          currencyAValue={parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}
+          currencyAValue={currencyAValue}
           currencyB={currencies[Field.CURRENCY_B]}
-          currencyBValue={parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}
+          currencyBValue={currencyBValue}
         />
       </AddLiquidityModalHeader>
     )
@@ -73,7 +76,7 @@ const ConfirmAddLiquidityModal: React.FC<
 
   const modalBottom = useCallback(() => {
     return (
-      <Button width="100%" onClick={onAdd} mt="20px" style={{background: '#111526'}}>
+      <Button width="100%" onClick={onAdd} mt="20px" style={{ background: '#111526' }}>
         {noLiquidity ? t('Create Pool & Supply') : t('Confirm Supply')}
       </Button>
     )
