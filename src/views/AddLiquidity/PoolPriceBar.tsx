@@ -11,18 +11,23 @@ function PoolPriceBar({
   noLiquidity,
   poolTokenPercentage,
   price,
+  myPrice,
 }: {
   currencies: { [field in Field]?: Currency }
   noLiquidity?: boolean
   poolTokenPercentage?: Percent
   price?: Price
+  myPrice?: string
 }) {
   const { t } = useTranslation()
+
   return (
     <AutoColumn gap="md">
       <AutoRow justify="space-around" gap="4px">
         <AutoColumn justify="center">
-          <Text fontSize="14px" color="#333">{price?.toSignificant(6) ?? '-'}</Text>
+          <Text fontSize="14px" color="#333">
+            {myPrice ?? price?.toSignificant(6) ?? '-'}
+          </Text>
           <Text fontSize="12px" pt={1} color="#111526">
             {t('%assetA% per %assetB%', {
               assetA: currencies[Field.CURRENCY_B]?.symbol ?? '',
@@ -31,7 +36,9 @@ function PoolPriceBar({
           </Text>
         </AutoColumn>
         <AutoColumn justify="center">
-          <Text fontSize="14px" color="#333">{price?.invert()?.toSignificant(6) ?? '-'}</Text>
+          <Text fontSize="14px" color="#333">
+            {myPrice ? 1 / Number(myPrice) : price?.invert()?.toSignificant(6) ?? '-'}
+          </Text>
           <Text fontSize="12px" pt={1} color="#111526">
             {t('%assetA% per %assetB%', {
               assetA: currencies[Field.CURRENCY_A]?.symbol ?? '',

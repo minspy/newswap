@@ -861,15 +861,16 @@ export default function AddLiquidity() {
                       poolTokenPercentage={preferZapInstead ? zapIn.poolTokenPercentage : poolTokenPercentage}
                       noLiquidity={noLiquidity}
                       price={price}
+                      myPrice={myPrice}
                     />
                   </LightCard>
                 )}
+                {/* 恒定乘积公式 XY^0.5=K */}
                 <Text textAlign="center">
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                     <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
                     <Text>{swapFormulaList[swapSelect - 1].value}</Text>
                   </div>
-                  {/* 恒定乘积公式 XY^0.5=K */}
                 </Text>
                 {pair && poolData && (
                   <RowBetween>
