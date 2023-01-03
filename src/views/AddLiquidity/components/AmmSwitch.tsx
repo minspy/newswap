@@ -13,12 +13,11 @@ import { SettingsMode } from 'components/Menu/GlobalSettings/types'
 
 interface Props {
   backTo: any
-  defaultAmmType: AmmType
   noLiquidity: boolean
 }
 
-const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, defaultAmmType, noLiquidity }) => {
-  let ammType = useAmmType()
+const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, noLiquidity }) => {
+  const ammType = useAmmType()
 
   const dispatch = useAppDispatch()
 
@@ -26,10 +25,6 @@ const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, defaultAm
 
   const setAmmType = (index: AmmType) => {
     dispatch(changeAmmType(index))
-  }
-
-  if (!noLiquidity) {
-    ammType = defaultAmmType
   }
 
   return (

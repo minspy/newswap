@@ -242,7 +242,7 @@ export default function AddLiquidity() {
 
   const addTransaction = useTransactionAdder()
 
-  const defaultAmmType = useDefaultAmm({ currencyA, currencyB, noLiquidity })
+  useDefaultAmm({ currencyA, currencyB, noLiquidity })
 
   async function onAdd() {
     if (!chainId || !library || !account) return
@@ -609,7 +609,6 @@ export default function AddLiquidity() {
           <>
             <AmmSwitch
               noLiquidity={noLiquidity}
-              defaultAmmType={defaultAmmType}
               backTo={canZap ? () => setSteps(Steps.Choose) : '/liquidity'}
             />
             {/* <AppHeader

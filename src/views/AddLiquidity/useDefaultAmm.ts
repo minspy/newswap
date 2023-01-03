@@ -4,11 +4,10 @@ import flatMap from 'lodash/flatMap'
 import { Interface } from '@ethersproject/abi'
 import { Currency, Token, Pair } from '@pancakeswap/sdk'
 
-import {
-  BASES_TO_CHECK_TRADES_AGAINST,
-  CUSTOM_BASES,
-  ADDITIONAL_BASES,
-} from 'config/constants/exchange'
+import { useAppDispatch } from 'state'
+import { changeAmmType } from 'state/amm/reducer'
+
+import { BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES, ADDITIONAL_BASES } from 'config/constants/exchange'
 import IPancakePairABI from 'config/abi/IPancakePair.json'
 
 import { wrappedCurrency } from 'utils/wrappedCurrency'
@@ -30,6 +29,8 @@ const useDefaultAmm = ({
   noLiquidity: boolean
 }) => {
   const { chainId } = useActiveWeb3React()
+
+  const dispatch = useAppDispatch()
 
   const [tokenA, tokenB] = chainId
     ? [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)]
@@ -93,8 +94,6 @@ const useDefaultAmm = ({
 
   const exponentsResult = useMultipleContractSingleData(validPairAddresses, PAIR_INTERFACE, 'getExponents')
 
-  let ammType = AmmType.Default
-
   exponentsResult.forEach((result, i) => {
     const { result: exponents, loading } = result
 
@@ -111,13 +110,13 @@ const useDefaultAmm = ({
     const decimalExponent1 = parseInt(exponent1, 10)
 
     if (decimalExponent1 === 50) {
-      ammType = AmmType.Five
+      dispatch(changeAmmType(AmmType.Five))
     } else if (decimalExponent1 === 75) {
-      ammType = AmmType.SevenFive
+      dispatch(changeAmmType(AmmType.SevenFive))
     }
   })
 
-  return ammType
+  return undefined
 }
 
 export default useDefaultAmm
