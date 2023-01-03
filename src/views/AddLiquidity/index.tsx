@@ -79,7 +79,6 @@ export default function AddLiquidity() {
   const ammType = useAmmType()
   const [zapMode] = useZapModeManager()
   const [temporarilyZapMode, setTemporarilyZapMode] = useState(true)
-  const [swapSelect, setSwapSelect] = useState(1)
   const [currencyIdA, currencyIdB] = router.query.currency || ['BNB', CAKE[chainId]?.address]
   const [steps, setSteps] = useState(Steps.Choose)
 
@@ -212,7 +211,6 @@ export default function AddLiquidity() {
       canZap,
       dependentField,
       independentField,
-      noLiquidity,
       otherTypedValue,
       parsedAmounts,
       typedValue,
@@ -607,8 +605,8 @@ export default function AddLiquidity() {
         {showAddLiquidity && (
           <>
             <AmmSwitch
-              swapSelect={swapSelect}
-              setSwapSelect={setSwapSelect}
+              noLiquidity={noLiquidity}
+              address={[]}
               backTo={canZap ? () => setSteps(Steps.Choose) : '/liquidity'}
             />
             {/* <AppHeader
@@ -662,8 +660,8 @@ export default function AddLiquidity() {
                 )}
                 <Text textAlign="center">
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
-                    <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
-                    <Text>{swapFormulaList[swapSelect - 1].value}</Text>
+                    <Text style={{ marginRight: '20px' }}>{swapFormulaList[ammType - 1].label}</Text>
+                    <Text>{swapFormulaList[ammType - 1].value}</Text>
                   </div>
                   {/* 恒定乘积公式 XY^0.5=K */}
                 </Text>
@@ -868,8 +866,8 @@ export default function AddLiquidity() {
                 {/* 恒定乘积公式 XY^0.5=K */}
                 <Text textAlign="center">
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
-                    <Text style={{ marginRight: '20px' }}>{swapFormulaList[swapSelect - 1].label}</Text>
-                    <Text>{swapFormulaList[swapSelect - 1].value}</Text>
+                    <Text style={{ marginRight: '20px' }}>{swapFormulaList[ammType - 1].label}</Text>
+                    <Text>{swapFormulaList[ammType - 1].value}</Text>
                   </div>
                 </Text>
                 {pair && poolData && (
