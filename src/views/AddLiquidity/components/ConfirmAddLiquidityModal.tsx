@@ -7,6 +7,8 @@ import TransactionConfirmationModal, {
   TransactionErrorContent,
 } from 'components/TransactionConfirmationModal'
 import { Field } from 'state/burn/actions'
+import { AmmType } from 'state/amm/types'
+import { useAmmType } from 'state/amm/hooks'
 import { AddLiquidityModalHeader, PairDistribution } from './common'
 
 interface ConfirmAddLiquidityModalProps {
@@ -49,8 +51,20 @@ const ConfirmAddLiquidityModal: React.FC<
 }) => {
   const { t } = useTranslation()
 
+  const ammType = useAmmType()
+
   const currencyAValue = parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)
   const currencyBValue = parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)
+
+  let percent = 0.5
+
+  if (ammType === AmmType.Five) {
+    percent = 2 / 3
+  }
+
+  if (ammType === AmmType.SevenFive) {
+    percent = 4 / 7
+  }
 
   const modalHeader = useCallback(() => {
     return (
@@ -64,7 +78,7 @@ const ConfirmAddLiquidityModal: React.FC<
       >
         <PairDistribution
           title={t('Input')}
-          percent={Number(currencyAValue) / (Number(currencyAValue) + Number(currencyBValue))}
+          percent={percent}
           currencyA={currencies[Field.CURRENCY_A]}
           currencyAValue={currencyAValue}
           currencyB={currencies[Field.CURRENCY_B]}
