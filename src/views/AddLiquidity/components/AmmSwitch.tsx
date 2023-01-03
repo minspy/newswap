@@ -66,6 +66,7 @@ const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, noLiquidi
             fontSize: '12px',
             lineHeight: '15px',
           }}
+          disabled={!noLiquidity}
           onClick={() => {
             setAmmType(AmmType.Default)
           }}
@@ -88,6 +89,7 @@ const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, noLiquidi
             fontSize: '12px',
             lineHeight: '15px',
           }}
+          disabled={!noLiquidity}
           onClick={() => {
             setAmmType(AmmType.SevenFive)
           }}
@@ -110,6 +112,7 @@ const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, noLiquidi
             fontSize: '12px',
             lineHeight: '15px',
           }}
+          disabled={!noLiquidity}
           onClick={() => {
             setAmmType(AmmType.Five)
           }}
@@ -117,19 +120,6 @@ const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, noLiquidi
           SWAP3
         </Button>
       </div>
-      {/* <ButtonMenu
-        activeIndex={ammType - 1}
-        onItemClick={(index: number) => {
-          setAmmType(index + 1)
-        }}
-        scale="sm"
-        ml="12px"
-        disabled={!noLiquidity}
-      >
-        <ButtonMenuItem textColor="#111526">SWAP1</ButtonMenuItem>
-        <ButtonMenuItem>SWAP2</ButtonMenuItem>
-        <ButtonMenuItem>SWAP3</ButtonMenuItem>
-      </ButtonMenu> */}
       <div
         style={{
           display: 'flex',
