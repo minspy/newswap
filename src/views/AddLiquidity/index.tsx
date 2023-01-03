@@ -29,7 +29,7 @@ import { useLPApr } from 'state/swap/hooks'
 import { ROUTER_ADDRESS } from 'config/constants/exchange'
 import { CAKE } from 'config/constants/tokens'
 import { LightCard } from '../../components/Card'
-import AmmSwitch from '../../components/AmmSwitch'
+import AmmSwitch from './components/AmmSwitch'
 import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
 import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import PriceInputPanel from '../../components/PriceInputPanel'
@@ -63,6 +63,7 @@ import { formatAmount } from '../../utils/formatInfoNumbers'
 import { useCurrencySelectRoute } from './useCurrencySelectRoute'
 import { useAppDispatch } from '../../state'
 import { CommonBasesType } from '../../components/SearchModal/types'
+import useDefaultAmm from './useDefaultAmm'
 
 enum Steps {
   Choose,
@@ -240,6 +241,8 @@ export default function AddLiquidity() {
   )
 
   const addTransaction = useTransactionAdder()
+
+  const defaultAmmType = useDefaultAmm({ currencyA, currencyB, noLiquidity })
 
   async function onAdd() {
     if (!chainId || !library || !account) return
@@ -606,7 +609,7 @@ export default function AddLiquidity() {
           <>
             <AmmSwitch
               noLiquidity={noLiquidity}
-              address={[]}
+              defaultAmmType={defaultAmmType}
               backTo={canZap ? () => setSteps(Steps.Choose) : '/liquidity'}
             />
             {/* <AppHeader

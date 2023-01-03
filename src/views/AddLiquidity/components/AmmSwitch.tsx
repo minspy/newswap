@@ -1,41 +1,36 @@
 import React from 'react'
 import Link from 'next/link'
-// import styled from 'styled-components'
-import { NotificationDot, ArrowBackIcon, IconButton, Button, ButtonMenu, ButtonMenuItem } from '@pancakeswap/uikit'
 
+import { NotificationDot, ArrowBackIcon, IconButton, Button, ButtonMenu, ButtonMenuItem } from '@pancakeswap/uikit'
 import { useAppDispatch } from 'state'
 import { changeAmmType } from 'state/amm/reducer'
 import { AmmType } from 'state/amm/types'
 import { useAmmType } from 'state/amm/hooks'
 import GlobalSettings from 'components/Menu/GlobalSettings'
 import { useExpertModeManager } from 'state/user/hooks'
-import Transactions from '../App/Transactions'
-import { SettingsMode } from '../Menu/GlobalSettings/types'
+import Transactions from 'components/App/Transactions'
+import { SettingsMode } from 'components/Menu/GlobalSettings/types'
 
 interface Props {
   backTo: any
-  address: any[]
+  defaultAmmType: AmmType
   noLiquidity: boolean
 }
 
-const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, address, noLiquidity }) => {
-  const ammType = useAmmType()
+const AmmSwitch: React.FC<React.PropsWithChildren<Props>> = ({ backTo, defaultAmmType, noLiquidity }) => {
+  let ammType = useAmmType()
 
   const dispatch = useAppDispatch()
+
   const [expertMode] = useExpertModeManager()
+
   const setAmmType = (index: AmmType) => {
     dispatch(changeAmmType(index))
   }
 
-  // const tokenBIsBNB = currencyB === ETHER
-  // const validPairAddresses = wrappedCurrency(tokenBIsBNB ? currencyA : currencyB, chainId)?.address
-
-  // const exponentsResult = useMultipleContractSingleData(
-  //   ['0x077ae208d580364fD476884bFC3FeCAebA2D4a07', '0x8744d01E61Adf84cd57751ce279b8c247Cc8d4cC'],
-  //   PAIR_INTERFACE,
-  //   'getExponents',
-  // )
-  // console.log('exponentsResult', exponentsResult)
+  if (!noLiquidity) {
+    ammType = defaultAmmType
+  }
 
   return (
     <div
