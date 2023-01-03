@@ -2,9 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 // import styled from 'styled-components'
 import { NotificationDot, ArrowBackIcon, IconButton, Button, ButtonMenu, ButtonMenuItem } from '@pancakeswap/uikit'
-import { ETHER } from '@pancakeswap/sdk'
-import { Interface } from '@ethersproject/abi'
-import IPancakePairABI from 'config/abi/IPancakePair.json'
 
 import { useAppDispatch } from 'state'
 import { changeAmmType } from 'state/amm/reducer'
@@ -12,12 +9,8 @@ import { AmmType } from 'state/amm/types'
 import { useAmmType } from 'state/amm/hooks'
 import GlobalSettings from 'components/Menu/GlobalSettings'
 import { useExpertModeManager } from 'state/user/hooks'
-import { useTradeExactIn, useTradeExactOut } from 'hooks/Trades'
-import { useMultipleContractSingleData } from 'state/multicall/hooks'
 import Transactions from '../App/Transactions'
 import { SettingsMode } from '../Menu/GlobalSettings/types'
-
-const PAIR_INTERFACE = new Interface(IPancakePairABI)
 
 interface Props {
   backTo: any
