@@ -624,38 +624,19 @@ export default function AddLiquidity() {
             <CardBody>
               <AutoColumn gap="20px">
                 {noLiquidity && (
-                  // <ColumnCenter>
-                  //   <Message variant="warning">
-                  //     <div style={{
-                  //         fontFamily: 'Inter',
-                  //         fontStyle: 'normal',
-                  //         fontWeight: 400,
-                  //         fontSize: '10px',
-                  //         lineHeight: '12px',
-                  //         color: '#4263EB'
-                  //       }}>
-                  //       <Text bold mb="8px">
-                  //         {t('You are the first liquidity provider.')}
-                  //       </Text>
-                  //       <Text mb="8px">{t('The ratio of tokens you add will set the price of this pool.')}</Text>
-                  //       <Text>{t('Once you are happy with the rate click supply to review.')}</Text>
-                  //     </div>
-                  //   </Message>
-                  // </ColumnCenter>
-                  <div
-                    style={{
-                      fontFamily: 'Inter',
-                      fontStyle: 'normal',
-                      fontWeight: 400,
-                      fontSize: '10px',
-                      lineHeight: '16px',
-                      color: '#4263EB',
-                    }}
-                  >
-                    <span>{t('You are the first liquidity provider.')}</span>
-                    <span>{t('The ratio of tokens you add will set the price of this pool.')}</span>
-                    <span>{t('Once you are happy with the rate click supply to review.')}</span>
-                  </div>
+                  <ColumnCenter>
+                    <div>
+                      <Text display="inline" fontSize="10px" color="#4263eb">
+                        {t('You are the first liquidity provider.')}
+                      </Text>
+                      <Text display="inline" fontSize="10px" color="#4263eb">
+                        {t('The ratio of tokens you add will set the price of this pool.')}
+                      </Text>
+                      <Text display="inline" fontSize="10px" color="#4263eb">
+                        {t('Once you are happy with the rate click supply to review.')}
+                      </Text>
+                    </div>
+                  </ColumnCenter>
                 )}
                 <Text textAlign="center">
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
