@@ -1,6 +1,6 @@
 import { Currency, Pair, Token } from '@pancakeswap/sdk'
 import { Button, ChevronDownIcon, Text, useModal, Flex, Box } from '@pancakeswap/uikit'
-import styled, { css } from 'styled-components'
+import styled, { css, useTheme } from 'styled-components'
 import { isAddress } from 'utils'
 import { useTranslation } from '@pancakeswap/localization'
 import { WrappedTokenInfo } from 'state/types'
@@ -126,6 +126,7 @@ export default function CurrencyInputPanel({
 
   const token = pair ? pair.liquidityToken : currency instanceof Token ? currency : null
   const tokenAddress = token ? isAddress(token.address) : null
+  const theme = useTheme()
 
   const amountInDollar = useBUSDCurrencyAmount(
     showBUSD ? currency : undefined,
@@ -240,9 +241,8 @@ export default function CurrencyInputPanel({
                 scale="xs"
                 variant="secondary"
                 style={{
-                  fontSize: '10px',
-                  border: '1px solid #000000',
-                  color: '#333333',
+                  color: theme.colors.inputCat,
+                  border: `1px solid ${theme.colors.inputCat}`
                 }}
               >
                 {t('Max').toLocaleUpperCase(locale)}
