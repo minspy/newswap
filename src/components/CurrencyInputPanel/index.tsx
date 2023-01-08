@@ -91,6 +91,7 @@ interface CurrencyInputPanelProps {
   error?: boolean
   showBUSD?: boolean
   labelType?: string
+  noLiquidity?: boolean
 }
 export default function CurrencyInputPanel({
   value,
@@ -114,6 +115,7 @@ export default function CurrencyInputPanel({
   error,
   showBUSD,
   labelType,
+  noLiquidity,
 }: CurrencyInputPanelProps) {
   const { account } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
@@ -142,9 +144,11 @@ export default function CurrencyInputPanel({
 
   return (
     <Box position="relative" id={id}>
-      <Text style={{ fontSize: '12px', marginBottom: '2px' }}>
-        {label === 'X' ? 'X（发行的代币）' : label === 'Y' ? 'Y（募集的代币）' : ''}
-      </Text>
+      {noLiquidity && (
+        <Text style={{ fontSize: '12px', marginBottom: '2px' }}>
+          {label === 'X' ? 'X（发行的代币）' : label === 'Y' ? 'Y（募集的代币）' : ''}
+        </Text>
+      )}
       <Flex alignItems="center" justifyContent="space-between" style={{ display: 'none' }}>
         {account && (
           <Text
