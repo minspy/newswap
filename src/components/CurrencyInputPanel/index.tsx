@@ -229,7 +229,7 @@ export default function CurrencyInputPanel({
               className="token-amount-input"
               value={value}
               onBlur={onInputBlur}
-              style={{ textAlign: 'left', fontSize: '20px', color: '#333333' }}
+              style={{ textAlign: 'left', fontSize: '20px', color: theme.colors.inputCat }}
               onUserInput={(val) => {
                 onUserInput(val)
               }}
