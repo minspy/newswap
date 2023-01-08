@@ -105,13 +105,16 @@ const useDefaultAmm = ({
       return
     }
 
-    const { exponent1 } = exponents
+    const { exponent0, exponent1 } = exponents
 
+    const decimalExponent0 = parseInt(exponent0, 10)
     const decimalExponent1 = parseInt(exponent1, 10)
 
-    if (decimalExponent1 === 50) {
+    if (decimalExponent0 === 50 || decimalExponent1 === 50) {
       dispatch(changeAmmType(AmmType.Five))
-    } else if (decimalExponent1 === 75) {
+      return
+    }
+    if (decimalExponent0 === 75 || decimalExponent1 === 75) {
       dispatch(changeAmmType(AmmType.SevenFive))
     }
   })
