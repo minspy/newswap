@@ -387,6 +387,7 @@ export default function AddLiquidity() {
       currencies={currencies}
       liquidityErrorMessage={liquidityErrorMessage}
       price={price}
+      myPrice={myPrice}
       noLiquidity={noLiquidity}
       poolTokenPercentage={poolTokenPercentage}
       liquidityMinted={liquidityMinted}

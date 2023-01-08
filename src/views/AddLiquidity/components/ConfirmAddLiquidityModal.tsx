@@ -22,6 +22,7 @@ interface ConfirmAddLiquidityModalProps {
   allowedSlippage: number
   liquidityErrorMessage: string
   price: Fraction
+  myPrice: string
   parsedAmounts: { [field in Field]?: CurrencyAmount }
   onAdd: () => void
   poolTokenPercentage: Percent
@@ -39,6 +40,7 @@ const ConfirmAddLiquidityModal: React.FC<
   hash,
   pendingText,
   price,
+  myPrice,
   currencies,
   noLiquidity,
   allowedSlippage,
@@ -74,6 +76,7 @@ const ConfirmAddLiquidityModal: React.FC<
         liquidityMinted={liquidityMinted}
         poolTokenPercentage={poolTokenPercentage}
         price={price}
+        myPrice={myPrice}
         noLiquidity={noLiquidity}
       >
         <PairDistribution
@@ -86,7 +89,7 @@ const ConfirmAddLiquidityModal: React.FC<
         />
       </AddLiquidityModalHeader>
     )
-  }, [allowedSlippage, currencies, liquidityMinted, noLiquidity, parsedAmounts, poolTokenPercentage, price, t])
+  }, [allowedSlippage, currencies, currencyAValue, currencyBValue, liquidityMinted, myPrice, noLiquidity, percent, poolTokenPercentage, price, t])
 
   const modalBottom = useCallback(() => {
     return (

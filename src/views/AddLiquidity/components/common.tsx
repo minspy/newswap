@@ -120,6 +120,7 @@ interface AddLiquidityModalHeaderProps {
   poolTokenPercentage?: Percent
   liquidityMinted: TokenAmount
   price: Fraction
+  myPrice: string
   allowedSlippage: number
   children: React.ReactNode
   noLiquidity?: boolean
@@ -130,6 +131,7 @@ export const AddLiquidityModalHeader = ({
   poolTokenPercentage,
   liquidityMinted,
   price,
+  myPrice,
   allowedSlippage,
   noLiquidity,
   children,
@@ -173,14 +175,14 @@ export const AddLiquidityModalHeader = ({
         <RowBetween>
           <Subtitle>{t('Rates')}</Subtitle>
           <Text>
-            {`1 ${currencies[Field.CURRENCY_A]?.symbol} = ${price?.toSignificant(4)} ${
+            {`1 ${currencies[Field.CURRENCY_A]?.symbol} = ${myPrice ?? price?.toSignificant(4)} ${
               currencies[Field.CURRENCY_B]?.symbol
             }`}
           </Text>
         </RowBetween>
         <RowBetween style={{ justifyContent: 'flex-end' }}>
           <Text>
-            {`1 ${currencies[Field.CURRENCY_B]?.symbol} = ${price?.invert().toSignificant(4)} ${
+            {`1 ${currencies[Field.CURRENCY_B]?.symbol} = ${myPrice ? 1 / Number(myPrice) : price?.invert().toSignificant(4)} ${
               currencies[Field.CURRENCY_A]?.symbol
             }`}
           </Text>
