@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
 import { currencyEquals, ETHER, JSBI, TokenAmount, WNATIVE, MINIMUM_LIQUIDITY } from '@pancakeswap/sdk'
+import { useTheme } from 'styled-components'
 import {
   Button,
   Text,
@@ -73,6 +74,7 @@ enum Steps {
 const zapAddress = getZapAddress()
 
 export default function AddLiquidity() {
+  const theme = useTheme()
   const router = useRouter()
   const { account, chainId, library } = useActiveWeb3React()
   const expertMode = useIsExpertMode()
@@ -822,10 +824,10 @@ export default function AddLiquidity() {
                   </RowFixed>
                 )}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                  <Text bold fontSize="12px" color="secondary" style={{ color: '#333333', fontSize: '12px' }}>
+                  <Text bold fontSize="12px" color="secondary" style={{ color: theme.colors.dark, fontSize: '12px' }}>
                     {t('Slippage Tolerance')}
                   </Text>
-                  <Text bold color="primary" style={{ marginLeft: '10px', color: '#333333', fontSize: '12px' }}>
+                  <Text bold color="primary" style={{ marginLeft: '10px', color: theme.colors.dark, fontSize: '12px' }}>
                     {allowedSlippage / 100}%
                   </Text>
                 </div>

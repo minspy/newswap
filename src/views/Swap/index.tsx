@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { CurrencyAmount, Token, Trade } from '@pancakeswap/sdk'
 import { computeTradePriceBreakdown, warningSeverity } from 'utils/exchange'
 import {
@@ -87,6 +87,7 @@ const SwitchIconButton = styled(IconButton)`
 `
 
 export default function Swap() {
+  const theme = useTheme()
   const router = useRouter()
   const loadedUrlParams = useDefaultsFromURLSearch()
   const { t } = useTranslation()
@@ -468,8 +469,8 @@ export default function Swap() {
                         </RowBetween>
                         {/* <RowBetween align="center"> */}
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                          <Label style={{ color: '#333333' }}>{t('Slippage Tolerance')}</Label>
-                          <Text bold color="primary" style={{ marginLeft: '10px', color: '#333333' }}>
+                          <Label style={{ color: theme.colors.dark }}>{t('Slippage Tolerance')}</Label>
+                          <Text bold color="primary" style={{ marginLeft: '10px', color: theme.colors.dark }}>
                             {allowedSlippage / 100}%
                           </Text>
                         </div>
